@@ -1,3 +1,75 @@
+# BirdCollector: A Bird Watcher's Diary
+
+## Description
+BirdCollector provides hobby birdwatchers with a way to keep track of the birds they've seen, also known as a life list. The app provides users with existing bird data to browse to find a bird they've seen, and save a list of their sightings. Users are also encouraged to populate the BirdCollector database with more birds.
+
+Models: 
+  User: name, username, password 
+  Bird: name, species, image, description
+  Sighting: date, user_id, bird_id, location, notes
+
+  - a user has many sightings
+  - a bird has many sightings
+  - a sighting belongs to a bird, and a user
+  - a user has many birds, through sightings
+  - a bird has many users, through sightings
+
+## User Stories:
+
+A user is able to:
+  - create a user account
+  - log in with a password, stay logged in
+  - log out
+  - full CRUD for Sighting resource
+    - create, edit, delete sighting
+  - read types of birds
+  - add birds to the database (also full crud?)
+
+## Stretch Goals:
+-
+
+## Overview:
+-
+
+## Functionality:
+-
+
+## Preview
+
+-
+
+## Technologies
+
+The app utilizes Ruby on Rails, JavaScript, React.js, JSX, HTML, CSS.
+
+## Installation
+
+To run the app locally, clone this GitHub repository into your machine with 'git clone'
+
+## Inspiration and Future Direction
+
+-
+
+## Authors and Acknowledgement
+
+This project was completed by Gucci Fan for Phase 4 of the Software Engineering course at Flatiron School.
+
+## Sources
+
+-
+
+## MIT License
+
+Copyright (c) 2023 Gucci Fan
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+--
+
 # Project Template: React/Rails API
 
 ## Description
@@ -349,3 +421,4 @@ troubleshoot:
 
 - [Getting Started with Ruby on Rails on Render](https://render.com/docs/deploy-rails)
 - [Render Databases Guide](https://render.com/docs/databases)
+
