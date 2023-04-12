@@ -24,6 +24,14 @@ A user is able to:
     - create, edit, delete sighting
   - read types of birds
   - add birds to the database (also full crud?)
+  - see everyone's sightings
+  - birds listed with their sighting
+
+PLAN:
+  - build login/logout functionality
+  - look for bird api, seed file initially fetches from api
+  - ebird
+  https://www.rithmschool.com/courses
 
 ## Stretch Goals:
 -
