@@ -1,7 +1,11 @@
 class UsersController < ApplicationController
     def create
         user = User.create(user_params)
-        render json: user, status: :created
+        if user.valid?
+            render json: user, status: :created
+        else
+            render json: {error: "error"}
+        end
     end
 
     def show
@@ -12,6 +16,6 @@ class UsersController < ApplicationController
     private
 
     def user_params
-        params.permit(:name, :username, :password_confirmation)
+        params.permit(:name, :username, :password, :password_confirmation)
     end
 end
