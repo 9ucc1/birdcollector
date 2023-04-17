@@ -39,7 +39,17 @@ function Header(){
             >
                 Log In
         </NavLink>
-        <button>signup</button>
+        <NavLink
+                to="/signup"
+                exact
+                style={linkStyles}
+                activeStyle={{
+                    background: "beige",
+                    color: "black",
+                  }}
+            >
+                Sign Up
+        </NavLink>
         <button>logout</button>
         </>
     )

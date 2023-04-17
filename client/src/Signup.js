@@ -1,24 +1,27 @@
-function Login(){
-    return(
+function Signup(){
+
+    return (
         <>
-        <div>login here</div>
         <form>
             <label>Username:</label>
             <input
                 type="text"
-                id="username"
             />
             <br/>
             <label>Password:</label>
             <input 
                 type="text"
-                id="password"
             />
             <br/>
-            <button type="submit">Log In</button>
+            <label>Confirm Password:</label>
+            <input 
+                type="text"
+            />
+            <br/>
+            <button type="submit">Submit</button>
         </form>
         </>
     )
 }
 
-export default Login
+export default Signup
