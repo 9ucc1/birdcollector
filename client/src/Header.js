@@ -16,7 +16,7 @@ function Header(){
     
     return(
         <>
-        <div>header</div>
+        <div>BirdCollector</div>
         <NavLink
                 to="/"
                 exact
@@ -27,6 +27,28 @@ function Header(){
                   }}
             >
                 Home
+        </NavLink>
+        <NavLink
+                to="/"
+                exact
+                style={linkStyles}
+                activeStyle={{
+                    background: "beige",
+                    color: "black",
+                  }}
+            >
+                Browse Birds
+        </NavLink>
+        <NavLink
+                to="/"
+                exact
+                style={linkStyles}
+                activeStyle={{
+                    background: "beige",
+                    color: "black",
+                  }}
+            >
+                My Birds
         </NavLink>
         <NavLink
                 to="/login"
@@ -40,6 +62,17 @@ function Header(){
                 Log In
         </NavLink>
         <NavLink
+                to="/logout"
+                exact
+                style={linkStyles}
+                activeStyle={{
+                    background: "beige",
+                    color: "black",
+                  }}
+            >
+                Log Out
+        </NavLink>
+        <NavLink
                 to="/signup"
                 exact
                 style={linkStyles}
@@ -50,7 +83,6 @@ function Header(){
             >
                 Sign Up
         </NavLink>
-        <button>logout</button>
         </>
     )
 }
