@@ -29,29 +29,43 @@ function Header({user}){
             >
                 Home
         </NavLink>
-        <NavLink
-                to="/"
-                exact
-                style={linkStyles}
-                activeStyle={{
-                    background: "beige",
-                    color: "black",
-                  }}
-            >
-                Browse Birds
-        </NavLink>
-        <NavLink
-                to="/"
-                exact
-                style={linkStyles}
-                activeStyle={{
-                    background: "beige",
-                    color: "black",
-                  }}
-            >
-                My Birds
-        </NavLink>
-        <NavLink
+        {user ? (<>
+                    <NavLink
+                    to="/"
+                    exact
+                    style={linkStyles}
+                    activeStyle={{
+                        background: "beige",
+                        color: "black",
+                      }}
+                >
+                    Browse Birds
+            </NavLink>
+            <NavLink
+                    to="/"
+                    exact
+                    style={linkStyles}
+                    activeStyle={{
+                        background: "beige",
+                        color: "black",
+                      }}
+                >
+                    My Birds
+            </NavLink>
+            <NavLink
+                    to="/logout"
+                    exact
+                    style={linkStyles}
+                    activeStyle={{
+                        background: "beige",
+                        color: "black",
+                      }}
+                >
+                    Log Out
+            </NavLink>
+            </>)
+         : (<>
+            <NavLink
                 to="/login"
                 exact
                 style={linkStyles}
@@ -61,19 +75,8 @@ function Header({user}){
                   }}
             >
                 Log In
-        </NavLink>
-        <NavLink
-                to="/logout"
-                exact
-                style={linkStyles}
-                activeStyle={{
-                    background: "beige",
-                    color: "black",
-                  }}
-            >
-                Log Out
-        </NavLink>
-        <NavLink
+            </NavLink>
+            <NavLink
                 to="/signup"
                 exact
                 style={linkStyles}
@@ -84,6 +87,8 @@ function Header({user}){
             >
                 Sign Up
         </NavLink>
+         </>)}
+
         </main>
         </>
     )

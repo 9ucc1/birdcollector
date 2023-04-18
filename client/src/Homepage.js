@@ -1,12 +1,12 @@
 import React from 'react'
 
-function Homepage(){
+function Homepage({user}){
 
-return (
-    <>
-    <div>Welcome to the Bird Collector app!</div>
-    </>
-)
+    if (user) {
+        return <h2>Welcome, {user.name}!</h2>
+    } else {
+        return <h2>Welcome! Please Log In or Sign Up.</h2>
+    }
 }
 
 export default Homepage

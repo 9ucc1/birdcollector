@@ -25,7 +25,7 @@ function App() {
         <Signup setUser={setUser}/>
       </Route>
       <Route path='/'>
-        <Homepage/>
+        <Homepage user={user}/>
       </Route>
     </Switch>
     </>
