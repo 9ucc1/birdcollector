@@ -1,5 +1,5 @@
-import logo from './logo.svg';
 import './App.css';
+import {useState} from 'react'
 import {Route, Switch} from 'react-router-dom'
 import Homepage from './Homepage.js'
 import Header from './Header.js'
@@ -8,18 +8,21 @@ import Signup from './Signup.js'
 import Logout from './Logout.js'
 
 function App() {
+
+  const [user, setUser] = useState(null)
+
   return (
     <>
-    <Header/>
+    <Header user={user}/>
     <Switch>
       <Route path='/login'>
-        <Login/>
+        <Login setUser={setUser}/>
       </Route>
       <Route path='/logout'>
         <Logout/>
       </Route>
       <Route path='/signup'>
-        <Signup/>
+        <Signup setUser={setUser}/>
       </Route>
       <Route path='/'>
         <Homepage/>

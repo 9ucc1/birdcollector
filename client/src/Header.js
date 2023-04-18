@@ -10,13 +10,14 @@ const linkStyles = {
     color: "white",
   };
 
-function Header(){
+function Header({user}){
 
     //conditionally display sign up / log in/out
     
     return(
         <>
         <div>BirdCollector</div>
+        <main>
         <NavLink
                 to="/"
                 exact
@@ -83,6 +84,7 @@ function Header(){
             >
                 Sign Up
         </NavLink>
+        </main>
         </>
     )
 }

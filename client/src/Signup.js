@@ -1,6 +1,6 @@
 import {useState} from 'react'
 
-function Signup(){
+function Signup({setUser}){
 
     const [name, setName] = useState("")
     const [username, setUsername] = useState("")
@@ -20,7 +20,7 @@ function Signup(){
             })
         })
         .then(r=>r.json())
-        .then(r=>console.log(r))
+        .then(r=>setUser(r))
     }
 
     return (
