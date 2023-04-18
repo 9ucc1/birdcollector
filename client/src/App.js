@@ -19,7 +19,7 @@ function App() {
         <Login setUser={setUser}/>
       </Route>
       <Route path='/logout'>
-        <Logout/>
+        <Logout setUser={setUser}/>
       </Route>
       <Route path='/signup'>
         <Signup setUser={setUser}/>

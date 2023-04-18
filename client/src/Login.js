@@ -1,13 +1,14 @@
 import {useState} from 'react'
+//import {useHistory} from 'react-router-dom'
 
 function Login({setUser}){
 
+    //const history = useHistory()
     const [username, setUsername] = useState("")
     const [password, setPassword] = useState("")
    
     function handleSubmit(e){
-        e.preventDefault()
-        console.log("he")
+        e.preventDefault();
         fetch('/login', {
             method: "POST",
             headers: {"Content-Type": "application/json"},
@@ -18,6 +19,7 @@ function Login({setUser}){
         })
         .then(r=>r.json())
         .then(r=>setUser(r))
+        //history.push('/')
     }
 
     return(
@@ -34,7 +36,7 @@ function Login({setUser}){
             <br/>
             <label>Password:</label>
             <input 
-                type="text"
+                type="password"
                 id="password"
                 value={password}
                 onChange={e=>setPassword(e.target.value)}
