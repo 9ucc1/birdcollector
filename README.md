@@ -27,6 +27,8 @@ A user is able to:
   - see everyone's sightings
   - birds listed with their sighting
 
+  - birdwatching with friends?
+
 PLAN:
   - build login/logout functionality
   - look for bird api, seed file initially fetches from api

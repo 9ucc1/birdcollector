@@ -3,7 +3,10 @@ import {useState} from 'react'
 
 function Login({setUser}){
 
-    //const history = useHistory()
+    //how to persist login on refresh?
+
+    //const history = useHistory();
+    //const navigate = useNavigate()
     const [username, setUsername] = useState("")
     const [password, setPassword] = useState("")
    
