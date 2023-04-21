@@ -6,6 +6,8 @@ import Header from './Header.js'
 import Login from './Login.js'
 import Signup from './Signup.js'
 import Logout from './Logout.js'
+import Birds from './Birds.js'
+import NewBird from './NewBird.js'
 
 function App() {
 
@@ -23,6 +25,12 @@ function App() {
       </Route>
       <Route path='/signup'>
         <Signup setUser={setUser}/>
+      </Route>
+      <Route path='/birds/new'>
+        <NewBird/>
+      </Route>
+      <Route path='/birds'>
+        <Birds/>
       </Route>
       <Route path='/'>
         <Homepage user={user}/>

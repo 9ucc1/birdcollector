@@ -31,7 +31,7 @@ function Header({user}){
         </NavLink>
         {user ? (<>
                     <NavLink
-                    to="/"
+                    to="/birds"
                     exact
                     style={linkStyles}
                     activeStyle={{
