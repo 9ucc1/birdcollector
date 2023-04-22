@@ -8,6 +8,7 @@ import Signup from './Signup.js'
 import Logout from './Logout.js'
 import Birds from './Birds.js'
 import NewBird from './NewBird.js'
+import EditBird from './EditBird.js'
 
 function App() {
 
@@ -28,6 +29,9 @@ function App() {
       </Route>
       <Route path='/birds/new'>
         <NewBird/>
+      </Route>
+      <Route path='/birds/:id/edit'>
+        <EditBird/>
       </Route>
       <Route path='/birds'>
         <Birds/>
