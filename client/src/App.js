@@ -1,5 +1,5 @@
 import './App.css';
-import {useState} from 'react'
+import {useState, useEffect} from 'react'
 import {Route, Switch} from 'react-router-dom'
 import Homepage from './Homepage.js'
 import Header from './Header.js'
@@ -13,6 +13,13 @@ import EditBird from './EditBird.js'
 function App() {
 
   const [user, setUser] = useState(null)
+  const [birds, setBirds] = useState([])
+
+  useEffect(() => {
+      fetch('/birds')
+      .then(r=>r.json())
+      .then(r=>setBirds(r))
+  }, [])
 
   return (
     <>
@@ -31,10 +38,10 @@ function App() {
         <NewBird/>
       </Route>
       <Route path='/birds/:id/edit'>
-        <EditBird/>
+        <EditBird birds={birds}/>
       </Route>
       <Route path='/birds'>
-        <Birds/>
+        <Birds birds={birds}/>
       </Route>
       <Route path='/'>
         <Homepage user={user}/>

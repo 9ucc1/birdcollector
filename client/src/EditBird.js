@@ -1,15 +1,17 @@
 import {useState} from 'react'
 import {useParams} from 'react-router-dom'
 
-function EditBird(){
+function EditBird({birds}){
 
-    //const params = useParams()
+    const params = useParams()
 
     const initialBird = {
         com_name: ""
     }
 
     const [editBird, setEditBird] = useState(initialBird)
+
+    //const birdToEdit = birds.find()
 
     function handleChange(e){
         console.log(e)

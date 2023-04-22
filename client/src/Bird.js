@@ -2,17 +2,19 @@ import {Link, useParams} from 'react-router-dom'
 
 function Bird({birds}){
 
-    //const params = useParams()
+    const params = useParams()
 
     const renderBird = birds.map(bird => (
         <div>
             <img src={bird.image}/>
-            {bird.com_name}
-            {bird.sci_name}
-            {bird.conservation_status}
-            {bird.description}
+            <h2>{bird.com_name}</h2>
+            <h3>{bird.sci_name}</h3>
+            <p>Conservation Status: {bird.conservation_status}</p>
+            <p>{bird.description}</p>
             <button>Report a {bird.com_name} sighting!</button>
-            <button>Edit {bird.com_name}</button>
+            <Link to={`/birds/${bird.id}/edit`}>
+            Edit {bird.com_name}
+            </Link>
         </div>
     ))
 
