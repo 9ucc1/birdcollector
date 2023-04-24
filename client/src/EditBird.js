@@ -1,7 +1,7 @@
 import {useState} from 'react'
 import {useParams, useHistory, Link} from 'react-router-dom'
 
-function EditBird({birds, onEditBird}){
+function EditBird({birds, onEditBird, onDeleteBird}){
 
     const params = useParams()
     const history = useHistory()
@@ -44,6 +44,17 @@ function EditBird({birds, onEditBird}){
         .then(bird=>onEditBird(bird))
         alert("bird data updated!")
         history.push('/birds')
+    }
+
+    function handleDelete(){
+        fetch(`/birds/${params.id}`,{
+            method: "DELETE",
+        })
+        .then(r=>r.json())
+        .then(bird=>onDeleteBird(bird))
+        history.push('/birds')
+        alert("bird deleted!")
+        //unexpected end of json input?
     }
 
     return(
@@ -90,8 +101,13 @@ function EditBird({birds, onEditBird}){
                 placeholder="enter text"
             />
             <br/>
-            <button type="submit">Submit</button>
+            <button type="submit">Save Changes</button>
         </form>
+        <button onClick={handleDelete}>
+            Delete Bird?
+        </button>
+        <br/>
+        <Link to='/birds'>Back to All Birds</Link>
         </>
     )
 }

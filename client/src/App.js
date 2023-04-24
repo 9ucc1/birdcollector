@@ -32,6 +32,12 @@ function App() {
     setBirds(updatedBirds)
   }
 
+  function handleDeleteBird(deletedBird){
+    console.log("app delete bird", deletedBird)
+    const updatedBirds = birds.filter(bird=> bird.id !== deletedBird.id)
+    setBirds(updatedBirds)
+  }
+
   return (
     <>
     <Header user={user}/>
@@ -49,7 +55,11 @@ function App() {
         <NewBird onAddBird={handleAddBird}/>
       </Route>
       <Route path='/birds/:id/edit'>
-        <EditBird birds={birds} onEditBird={handleEditBird}/>
+        <EditBird 
+          birds={birds} 
+          onEditBird={handleEditBird}
+          onDeleteBird={handleDeleteBird}
+        />
       </Route>
       <Route path='/birds'>
         <Birds birds={birds}/>
