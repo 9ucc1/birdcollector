@@ -48,18 +48,7 @@ function Header({user}){
                         color: "black",
                       }}
                 >
-                    Sightings
-            </NavLink>
-            <NavLink
-                    to="/"
-                    exact
-                    style={linkStyles}
-                    activeStyle={{
-                        background: "beige",
-                        color: "black",
-                      }}
-                >
-                    My Sightings
+                    Browse Sightings
             </NavLink>
             <NavLink
                     to="/logout"

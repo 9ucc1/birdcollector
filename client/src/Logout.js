@@ -1,4 +1,8 @@
+import {useHistory} from 'react-router-dom'
+
 function Logout({setUser}){
+
+    const history = useHistory()
 
     function handleLogout(){
         fetch('/logout', {
@@ -9,12 +13,13 @@ function Logout({setUser}){
                 setUser(null)
             }
         })
+        alert("You've been logged out!")
+        history.push('/')
     }
 
     return (
         <>
-        <div>click below to confirm logout</div>
-        <button onClick={handleLogout}>Logout</button>
+        <button onClick={handleLogout}>Click to Confirm Logout</button>
         </>
     )
 }
