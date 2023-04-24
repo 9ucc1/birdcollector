@@ -5,6 +5,8 @@ rescue_from ActiveRecord::RecordNotFound, with: :render_not_found_response
         render json: Bird.all
     end
 
+    # LOGIN VALIDATION stuff for these
+
     def create
         bird = Bird.create(bird_params)
         render json: bird, status: :created

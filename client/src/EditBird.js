@@ -4,21 +4,43 @@ import {useParams} from 'react-router-dom'
 function EditBird({birds}){
 
     const params = useParams()
+    const birdToEdit = birds.find((bird)=>bird.id == params.id)
+    //useEffect?
 
     const initialBird = {
-        com_name: ""
+        com_name: "",
+        sci_name: "",
+        conservation_status: "",
+        image: "",
+        description: "",
     }
-
+    
     const [editBird, setEditBird] = useState(initialBird)
 
-    //const birdToEdit = birds.find()
-
     function handleChange(e){
-        console.log(e)
+        setEditBird((currentBirdState)=>(
+            {...currentBirdState, [e.target.name]: e.target.value}
+        ))
+        console.log(editBird)
+        console.log(birdToEdit.com_name)
     }
 
     function handleSubmit(e){
         e.preventDefault()
+        const formData = {
+            com_name: editBird.com_name,
+            sci_name: editBird.sci_name,
+            conservation_status: editBird.conservation_status,
+            image: editBird.image,
+            description: editBird.description
+        }
+        fetch(`/birds/${params.id}`,{
+            method: "PATCH",
+            headers: {"Content-Type": "application/json"},
+            body: JSON.stringify(formData)
+        })
+        .then(r=>r.json())
+        .then(r=>console.log(r))
     }
 
     return(
@@ -30,7 +52,7 @@ function EditBird({birds}){
                 type="text" name="com_name"
                 value={editBird.com_name}
                 onChange={handleChange}
-                placeholder="enter text"
+                //placeholder="enter text"
             />
             <br/>
             <label>Scientific Name:</label>
