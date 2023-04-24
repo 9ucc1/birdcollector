@@ -1,12 +1,14 @@
 import Bird from './Bird.js'
 import {useState, useEffect} from 'react'
-//import {Link} from 'react-router-dom'
+import {Link} from 'react-router-dom'
 
 function Birds({birds}){
 
     return (
     <>
-    bird
+    <Link to='/birds/new'>
+        Create a new bird
+    </Link>
     <Bird birds={birds}/>
     </>
     )

@@ -1,9 +1,10 @@
 import {useState} from 'react'
-import {useParams} from 'react-router-dom'
+import {useParams, useHistory, Link} from 'react-router-dom'
 
-function EditBird({birds}){
+function EditBird({birds, onEditBird}){
 
     const params = useParams()
+    const history = useHistory()
     const birdToEdit = birds.find((bird)=>bird.id == params.id)
     //useEffect?
 
@@ -40,7 +41,9 @@ function EditBird({birds}){
             body: JSON.stringify(formData)
         })
         .then(r=>r.json())
-        .then(r=>console.log(r))
+        .then(bird=>onEditBird(bird))
+        alert("bird data updated!")
+        history.push('/birds')
     }
 
     return(

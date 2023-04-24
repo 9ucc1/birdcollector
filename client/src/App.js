@@ -21,6 +21,17 @@ function App() {
       .then(r=>setBirds(r))
   }, [])
 
+  function handleAddBird(newBird){
+    console.log("app add bird", newBird)
+    setBirds([...birds, newBird])
+  }
+
+  function handleEditBird(editedBird){
+    console.log("app edit bird", editedBird)
+    const updatedBirds = birds.map(bird => bird.id === editedBird.id ? editedBird : bird)
+    setBirds(updatedBirds)
+  }
+
   return (
     <>
     <Header user={user}/>
@@ -35,10 +46,10 @@ function App() {
         <Signup setUser={setUser}/>
       </Route>
       <Route path='/birds/new'>
-        <NewBird/>
+        <NewBird onAddBird={handleAddBird}/>
       </Route>
       <Route path='/birds/:id/edit'>
-        <EditBird birds={birds}/>
+        <EditBird birds={birds} onEditBird={handleEditBird}/>
       </Route>
       <Route path='/birds'>
         <Birds birds={birds}/>

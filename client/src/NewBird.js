@@ -1,6 +1,7 @@
 import {useState} from 'react'
+import {Link} from 'react-router-dom'
 
-function NewBird(){
+function NewBird({onAddBird}){
 
     const initialNewBird = {
         com_name: "",
@@ -33,7 +34,8 @@ function NewBird(){
             body: JSON.stringify(formData)
         })
         .then(r=>r.json())
-        .then(r=>console.log(r))
+        .then(r=>onAddBird(r))
+        alert("new bird data created!")
         setNewBird(initialNewBird)
     }
 
@@ -83,6 +85,7 @@ function NewBird(){
             <br/>
             <button type="submit">Submit</button>
         </form>
+        <Link to='/birds'>Back to All Birds</Link>
         </>
     )
 }
