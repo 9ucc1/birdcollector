@@ -1,8 +1,11 @@
 import {useHistory} from 'react-router-dom'
+import {useContext} from 'react'
+import {UserContext} from './context/user'
 
-function Logout({setUser}){
+function Logout({/*setUser*/}){
 
     const history = useHistory()
+    const {logout} = useContext(UserContext)
 
     function handleLogout(){
         fetch('/logout', {
@@ -10,7 +13,7 @@ function Logout({setUser}){
         })
         .then(r=>{
             if (r.ok){
-                setUser(null)
+                logout()
             }
         })
         alert("You've been logged out!")

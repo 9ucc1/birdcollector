@@ -1,3 +1,5 @@
+import {useContext} from 'react'
+import {UserContext} from './context/user'
 import {NavLink} from 'react-router-dom'
 
 const linkStyles = {
@@ -10,7 +12,9 @@ const linkStyles = {
     color: "white",
   };
 
-function Header({user}){
+function Header({/*user*/}){
+
+    const {user} = useContext(UserContext)
     
     return(
         <>

@@ -1,14 +1,14 @@
-import {useState} from 'react'
+import {useState, useContext} from 'react'
 import {useHistory} from 'react-router-dom'
+import {UserContext} from './context/user'
 
-function Login({setUser}){
-
-    //how to persist login on refresh?
+function Login({/*setUser*/}){
 
     const history = useHistory();
     const [username, setUsername] = useState("")
     const [password, setPassword] = useState("")
-   
+    const {login} = useContext(UserContext)
+
     function handleSubmit(e){
         e.preventDefault();
         fetch('/login', {
@@ -20,7 +20,7 @@ function Login({setUser}){
             })
         })
         .then(r=>r.json())
-        .then(r=>setUser(r))
+        .then(r=>login(r))
         history.push('/')
     }
 
