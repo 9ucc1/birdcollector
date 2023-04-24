@@ -34,6 +34,7 @@ function NewBird({onAddBird}){
             body: JSON.stringify(formData)
         })
         .then(r=>r.json())
+        //catch errors (phase 1 fetch)
         .then(r=>onAddBird(r))
         alert("new bird data created!")
         setNewBird(initialNewBird)

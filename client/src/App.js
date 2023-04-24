@@ -9,16 +9,23 @@ import Logout from './Logout.js'
 import Birds from './Birds.js'
 import NewBird from './NewBird.js'
 import EditBird from './EditBird.js'
+import Sightings from './Sightings.js'
 
 function App() {
 
-  const [user, setUser] = useState(null)
+  const [user, setUser] = useState(null)//don't use null
+  //use effect for when logged in, session checks for log in (check curriculum)
+  //when user state exists, render route
   const [birds, setBirds] = useState([])
+  const [sightings, setSightings] = useState([])
 
   useEffect(() => {
       fetch('/birds')
       .then(r=>r.json())
       .then(r=>setBirds(r))
+      fetch('/sightings')
+      .then(r=>r.json())
+      .then(r=>setSightings(r))
   }, [])
 
   function handleAddBird(newBird){
@@ -63,6 +70,9 @@ function App() {
       </Route>
       <Route path='/birds'>
         <Birds birds={birds}/>
+      </Route>
+      <Route path='/sightings'>
+        <Sightings sightings={sightings} birds={birds}/>
       </Route>
       <Route path='/'>
         <Homepage user={user}/>

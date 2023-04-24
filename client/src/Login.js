@@ -1,12 +1,11 @@
 import {useState} from 'react'
-//import {useHistory} from 'react-router-dom'
+import {useHistory} from 'react-router-dom'
 
 function Login({setUser}){
 
     //how to persist login on refresh?
 
-    //const history = useHistory();
-    //const navigate = useNavigate()
+    const history = useHistory();
     const [username, setUsername] = useState("")
     const [password, setPassword] = useState("")
    
@@ -22,7 +21,7 @@ function Login({setUser}){
         })
         .then(r=>r.json())
         .then(r=>setUser(r))
-        //history.push('/')
+        history.push('/')
     }
 
     return(

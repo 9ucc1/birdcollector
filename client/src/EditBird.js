@@ -1,4 +1,4 @@
-import {useState} from 'react'
+import {useState, useEffect} from 'react'
 import {useParams, useHistory, Link} from 'react-router-dom'
 
 function EditBird({birds, onEditBird, onDeleteBird}){
@@ -6,29 +6,29 @@ function EditBird({birds, onEditBird, onDeleteBird}){
     const params = useParams()
     const history = useHistory()
     const birdToEdit = birds.find((bird)=>bird.id == params.id)
-    //useEffect?
+    //useEffect? call /birds/:id, set state
 
-    const initialBird = {
+    const initialBird = { //still empty strings
         com_name: "",
         sci_name: "",
         conservation_status: "",
         image: "",
         description: "",
     }
+    // won't grab birdToEdit attributes?
     
-    const [editBird, setEditBird] = useState(initialBird)
+    const [editBird, setEditBird] = useState(initialBird) //above useeffect
 
     function handleChange(e){
         setEditBird((currentBirdState)=>(
             {...currentBirdState, [e.target.name]: e.target.value}
         ))
-        console.log(editBird)
-        console.log(birdToEdit.com_name)
+        console.log(birdToEdit)
     }
 
     function handleSubmit(e){
         e.preventDefault()
-        const formData = {
+        const formData = { //editBird here
             com_name: editBird.com_name,
             sci_name: editBird.sci_name,
             conservation_status: editBird.conservation_status,
@@ -38,7 +38,7 @@ function EditBird({birds, onEditBird, onDeleteBird}){
         fetch(`/birds/${params.id}`,{
             method: "PATCH",
             headers: {"Content-Type": "application/json"},
-            body: JSON.stringify(formData)
+            body: JSON.stringify(editBird)
         })
         .then(r=>r.json())
         .then(bird=>onEditBird(bird))
@@ -66,7 +66,7 @@ function EditBird({birds, onEditBird, onDeleteBird}){
                 type="text" name="com_name"
                 value={editBird.com_name}
                 onChange={handleChange}
-                //placeholder="enter text"
+                placeholder="enter text"
             />
             <br/>
             <label>Scientific Name:</label>

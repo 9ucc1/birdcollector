@@ -11,8 +11,6 @@ const linkStyles = {
   };
 
 function Header({user}){
-
-    //conditionally display sign up / log in/out
     
     return(
         <>
@@ -42,6 +40,17 @@ function Header({user}){
                     Browse Birds
             </NavLink>
             <NavLink
+                    to="/sightings"
+                    exact
+                    style={linkStyles}
+                    activeStyle={{
+                        background: "beige",
+                        color: "black",
+                      }}
+                >
+                    Sightings
+            </NavLink>
+            <NavLink
                     to="/"
                     exact
                     style={linkStyles}
@@ -50,7 +59,7 @@ function Header({user}){
                         color: "black",
                       }}
                 >
-                    My Birds
+                    My Sightings
             </NavLink>
             <NavLink
                     to="/logout"
