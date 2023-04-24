@@ -6,6 +6,7 @@ class User < ApplicationRecord
     #These methods don't correspond to database columns! 
     #Instead, to make these methods work, 
     #your users table must have a password_digest column
+    validates :name, :username, :password, :password_confirmation, presence: true
     has_many :sightings
     has_many :birds, through: :sightings
 end

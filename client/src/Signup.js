@@ -1,11 +1,16 @@
-import {useState} from 'react'
+import {useState, useContext} from 'react'
+import {useHistory} from 'react-router-dom'
+import {UserContext} from './context/user'
 
-function Signup({setUser}){
+function Signup({/*setUser*/}){
 
+    const history = useHistory()
     const [name, setName] = useState("")
     const [username, setUsername] = useState("")
     const [password, setPassword] = useState("")
     const [passwordConfirmation, setPasswordConfirmation] = useState("")
+    const [errorsList, setErrorsList] = useState([])
+    const {signup} = useContext(UserContext)
 
     function handleSubmit(e){
         e.preventDefault()
@@ -20,7 +25,20 @@ function Signup({setUser}){
             })
         })
         .then(r=>r.json())
-        .then(r=>setUser(r))
+        //.then(r=>setUser(r))
+        .then(user=>{
+            if (!user.errors){
+                signup(user)
+                history.push('/')
+            } else {
+                setName("")
+                setUsername("")
+                setPassword("")
+                setPasswordConfirmation("")
+                const errorLis = user.errors.map(error=> <li>{error}</li>)
+                setErrorsList(errorLis)
+            }
+        })
     }
 
     return (
@@ -43,20 +61,21 @@ function Signup({setUser}){
             <br/>
             <label>Password:</label>
             <input 
-                type="text"
+                type="password"
                 value={password}
                 onChange={e=>setPassword(e.target.value)}
             />
             <br/>
             <label>Confirm Password:</label>
             <input 
-                type="text"
+                type="password"
                 value={passwordConfirmation}
                 onChange={e=>setPasswordConfirmation(e.target.value)}
             />
             <br/>
             <button type="submit">Sign Up</button>
         </form>
+        {errorsList}
         </>
     )
 }
