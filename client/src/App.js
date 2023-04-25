@@ -28,9 +28,9 @@ function App() {
       fetch('/birds')
       .then(r=>r.json())
       .then(r=>setBirds(r))
-      fetch('/sightings')
+      /*fetch('/sightings')
       .then(r=>r.json())
-      .then(r=>setSightings(r)) //don't fetch sightings, make serializers
+      .then(r=>setSightings(r))*/ //don't fetch sightings, make serializers
       //fetch(`/me`)
       //if response isnt error, then set user to return of response
   }, [])

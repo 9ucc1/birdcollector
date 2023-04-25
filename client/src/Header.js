@@ -18,7 +18,8 @@ function Header({/*user*/}){
     
     return(
         <>
-        <div>BirdCollector</div>
+        <div>BirdCollector </div>
+        {user ? (<div>you are logged in as {user.username}</div>) : (<div>you are not logged in</div>)}
         <main>
         <NavLink
                 to="/"

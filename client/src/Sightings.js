@@ -1,10 +1,10 @@
 import Sighting from './Sighting.js'
 
-function Sightings({sightings, birds}){
+function Sightings({birds}){
 
     return (
         <>
-        <Sighting sightings={sightings} birds={birds}/>
+        <Sighting birds={birds}/>
         </>
     )
 }
