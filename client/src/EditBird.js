@@ -50,9 +50,13 @@ function EditBird({birds, onEditBird, onDeleteBird}){
         fetch(`/birds/${params.id}`,{
             method: "DELETE",
         })
-        .then(r=>r.json())
-        .then(bird=>onDeleteBird(bird))
-        history.push('/birds')
+        .then(r=> {
+            if (r.ok){
+                onDeleteBird(params.id)
+            }
+        })
+        //.then(bird=>onDeleteBird(bird))
+        //history.push('/birds')
         alert("bird deleted!")
         //unexpected end of json input?
     }

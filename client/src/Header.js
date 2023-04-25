@@ -53,7 +53,7 @@ function Header({/*user*/}){
                         color: "black",
                       }}
                 >
-                    Browse Sightings
+                    My Sightings
             </NavLink>
             <NavLink
                     to="/logout"

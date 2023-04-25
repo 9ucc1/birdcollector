@@ -1,16 +1,15 @@
-function Sighting({birds}){
+import {useContext} from 'react'
+import {UserContext} from './context/user'
 
-    /*const renderSightings = sightings.map(sighting=>(
-        <>
-        <h3>{sighting.bird_id}</h3>
-        <h3>{sighting.user_id}</h3>
-        </>
-    ))*/
-    //how to get bird name
+function Sighting({bird}){
+
+    const {user} = useContext(UserContext)
+
+    //return all sightings, by user, of THIS bird
 
     return(
         <>
-        sighting
+        {bird.com_name}
         </>
     )
 }

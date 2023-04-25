@@ -51,9 +51,10 @@ function App() {
     setBirds(updatedBirds)
   }
 
-  function handleDeleteBird(deletedBird){
-    console.log("app delete bird", deletedBird)
-    const updatedBirds = birds.filter(bird=> bird.id !== deletedBird.id)
+  function handleDeleteBird(deletedBirdId){
+    console.log("app delete bird", deletedBirdId)
+    const updatedBirds = birds.filter(bird=> bird.id != deletedBirdId)
+    console.log(updatedBirds)
     setBirds(updatedBirds)
   }
 
