@@ -17,6 +17,12 @@ rescue_from ActiveRecord::RecordNotFound, with: :render_not_found_response
         render json: bird
     end
 
+    #def showsightings
+    #    bird = Bird.find(params[:id])
+    #    render json: bird.sightings
+        #that the user found
+    #end
+
     def update
         bird = Bird.find(params[:id])
         bird.update(bird_params)

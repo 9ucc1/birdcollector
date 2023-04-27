@@ -19,7 +19,7 @@ function Header(){
     return(
         <>
         <h2>BirdCollector </h2>
-        {user ? (<p>you are logged in as {user.username}</p>) : (<p>you are not logged in</p>)}
+        {user === null || user.error ? (<p>you are not logged in</p>) : (<p>you are logged in as {user.username}</p>)}
         <main>
         <NavLink
                 to="/"
@@ -32,7 +32,32 @@ function Header(){
             >
                 Home
         </NavLink>
-        {user ? (<>
+        { user === null || user.error ? (<>
+            <NavLink
+                to="/login"
+                exact
+                style={linkStyles}
+                activeStyle={{
+                    background: "beige",
+                    color: "black",
+                  }}
+            >
+                Log In
+            </NavLink>
+            <NavLink
+                to="/signup"
+                exact
+                style={linkStyles}
+                activeStyle={{
+                    background: "beige",
+                    color: "black",
+                  }}
+            >
+                Sign Up
+        </NavLink>
+         </>)
+         :
+            (<>
                     <NavLink
                     to="/birds"
                     exact
@@ -67,30 +92,7 @@ function Header(){
                     Log Out
             </NavLink>
             </>)
-         : (<>
-            <NavLink
-                to="/login"
-                exact
-                style={linkStyles}
-                activeStyle={{
-                    background: "beige",
-                    color: "black",
-                  }}
-            >
-                Log In
-            </NavLink>
-            <NavLink
-                to="/signup"
-                exact
-                style={linkStyles}
-                activeStyle={{
-                    background: "beige",
-                    color: "black",
-                  }}
-            >
-                Sign Up
-        </NavLink>
-         </>)}
+         }
 
         </main>
         </>

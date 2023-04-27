@@ -9,6 +9,17 @@ rescue_from ActiveRecord::RecordInvalid, with: :render_unprocessable_entity_resp
         render json: Sighting.all
     end
 
+    def show
+        sighting = Sighting.find(params[:id])
+        render json: sighting
+    end
+
+    def destroy
+        sighting = Sighting.find(params[:id])
+        sighting.destroy
+        head :no_content
+    end
+
     private
 
     def sighting_params

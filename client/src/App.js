@@ -11,7 +11,9 @@ import Birds from './Birds.js'
 import NewBird from './NewBird.js'
 import EditBird from './EditBird.js'
 import Sightings from './Sightings.js'
+import Sighting from './Sighting.js'
 import NewSighting from './NewSighting.js'
+import EditSighting from './EditSighting.js'
 
 function App() {
 
@@ -63,7 +65,21 @@ function App() {
     const birdToUpdate = birds.find(bird=>bird.id === newSighting.bird_id)
     const updatedSightings = [...birdToUpdate.sightings, newSighting]
     birdToUpdate.sightings = updatedSightings
-    setBirds(birdToUpdate)
+    const updatedBirdState = birds.map((bird) => bird.id === birdToUpdate.id ? birdToUpdate : bird)
+    setBirds(updatedBirdState)
+  }
+
+  function handleDeleteSighting(deletedSightingId, userBirdId){
+    //if you just have sighting id how do you get its bird
+    //const sighting = user.sightings.find(sighting=>sighting.id == deletedSightingId)
+    //const birdId = sighting.bird_id
+    //const birdToUpdate = birds.find(bird=>bird.id == birdId)
+    const birdToUpdate = birds.find(bird=>bird.id==userBirdId)
+    const sightingsToUpdate = birdToUpdate.sightings
+    const updatedSightings = sightingsToUpdate.filter(sighting=> sighting.id != deletedSightingId)
+    birdToUpdate.sightings = updatedSightings
+    const updatedBirdState = birds.map(bird=>bird.id === birdToUpdate.id ? birdToUpdate : bird)
+    setBirds(updatedBirdState)
   }
 
   return (
@@ -85,6 +101,12 @@ function App() {
           birds={birds} 
           onAddSighting={handleAddSighting}
         />
+      </Route>
+      <Route path='/sightings/:id'>
+        <EditSighting onDeleteSighting={handleDeleteSighting}/>
+      </Route>
+      <Route path='/birds/:id/sightings'>
+        <Sighting />
       </Route>
       <Route path='/birds/new'>
         <NewBird onAddBird={handleAddBird}/>

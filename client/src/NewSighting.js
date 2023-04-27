@@ -38,6 +38,7 @@ function NewSighting({onAddSighting}){
         })
         .then(r=>r.json())
         .then(r=>onAddSighting(r))
+        alert("Sighting recorded!")
     }
 
     return (
@@ -49,9 +50,9 @@ function NewSighting({onAddSighting}){
                 type="text" name="date"
                 value={newSighting.date}
                 onChange={handleChange}
-                placeholder="YYYY/MM/DD"
+                placeholder="YYYY-MM-DD"
             />
-                        <br/>
+            <br/>
             <label>Location: </label>
             <input
                 type="text" name="location"

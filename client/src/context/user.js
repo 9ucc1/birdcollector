@@ -1,11 +1,11 @@
 import React, {useState, useEffect} from 'react'
 
 //create context
-const UserContext = React.createContext()
+const UserContext = React.createContext({user: []})
 
 //create provider component
 function UserProvider({children}){
-    const [user, setUser] = useState({})
+    const [user, setUser] = useState(null)
     const [isLoaded, setIsLoaded] = useState(false)
 
     useEffect(()=>{
