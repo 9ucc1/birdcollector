@@ -5,16 +5,24 @@ const UserContext = React.createContext()
 
 //create provider component
 function UserProvider({children}){
-    const [user, setUser] = useState(null)
+    const [user, setUser] = useState({})
+    const [isLoaded, setIsLoaded] = useState(false)
 
     useEffect(()=>{
         fetch('/me')
         .then(r=>r.json())
         .then(r=>{
             setUser(r)
-            console.log(user)
+            //console.log(user)
+            setIsLoaded(true)
         })
     }, [])
+
+    if (!isLoaded){
+        return(
+            <p>Loading...</p>
+        )
+    }
 
     const login = (user)=>{
         setUser(user)

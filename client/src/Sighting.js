@@ -9,7 +9,9 @@ function Sighting({bird}){
 
     return(
         <>
-        {bird.com_name}
+        {bird.sightings.map(sighting => (
+            <>{sighting.date}</>
+        ))}
         </>
     )
 }

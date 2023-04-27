@@ -9,4 +9,12 @@ class User < ApplicationRecord
     validates :name, :username, :password, :password_confirmation, presence: true
     has_many :sightings
     has_many :birds, through: :sightings
+
+    def birds_uniq
+        self.birds.uniq
+    end
+
+    def birds_count
+        self.birds.uniq.count 
+    end
 end

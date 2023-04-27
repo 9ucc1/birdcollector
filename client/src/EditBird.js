@@ -1,9 +1,9 @@
 import {useState, useEffect} from 'react'
-import {useParams, useHistory, Link} from 'react-router-dom'
+import {useParams, Link} from 'react-router-dom'
 
-function EditBird({birds, onEditBird, onDeleteBird}){
+function EditBird({onEditBird, onDeleteBird}){
 
-    const [editBird, setEditBird] = useState([]) //above useeffect
+    const [editBird, setEditBird] = useState([])
     const params = useParams()
 
     useEffect(()=> {
@@ -12,21 +12,6 @@ function EditBird({birds, onEditBird, onDeleteBird}){
         .then(r=>setEditBird(r))
         console.log(editBird)
     }, [])
-
-
-    const history = useHistory()
-    //const birdToEdit = birds.find((bird)=>bird.id == params.id)
-    //useEffect? call /birds/:id, set state
-
-    const initialBird = { //still empty strings
-        com_name: "",
-        sci_name: "",
-        conservation_status: "",
-        image: "",
-        description: "",
-    }
-    // won't grab birdToEdit attributes?
-
 
     function handleChange(e){
         setEditBird((currentBirdState)=>(
@@ -37,13 +22,6 @@ function EditBird({birds, onEditBird, onDeleteBird}){
 
     function handleSubmit(e){
         e.preventDefault()
-        /*const formData = { //editBird here
-            com_name: editBird.com_name,
-            sci_name: editBird.sci_name,
-            conservation_status: editBird.conservation_status,
-            image: editBird.image,
-            description: editBird.description
-        }*/
         fetch(`/birds/${params.id}`,{
             method: "PATCH",
             headers: {"Content-Type": "application/json"},
@@ -52,7 +30,6 @@ function EditBird({birds, onEditBird, onDeleteBird}){
         .then(r=>r.json())
         .then(bird=>onEditBird(bird))
         alert("bird data updated!")
-        history.push('/birds')
     }
 
     function handleDelete(){

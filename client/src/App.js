@@ -22,7 +22,7 @@ function App() {
   //when user state exists, render route
   //useContext
   const [birds, setBirds] = useState([])
-  const [sightings, setSightings] = useState([])
+  //const [sightings, setSightings] = useState([])
 
   useEffect(() => {
       fetch('/birds')
@@ -58,6 +58,14 @@ function App() {
     setBirds(updatedBirds)
   }
 
+  function handleAddSighting(newSighting){
+    console.log("app add sighting", newSighting)
+    const birdToUpdate = birds.find(bird=>bird.id === newSighting.bird_id)
+    const updatedSightings = [...birdToUpdate.sightings, newSighting]
+    birdToUpdate.sightings = updatedSightings
+    setBirds(birdToUpdate)
+  }
+
   return (
     <>
     <UserProvider>
@@ -73,7 +81,10 @@ function App() {
         <Signup /*setUser={setUser}*//>
       </Route>
       <Route path='/birds/:id/newsighting'>
-        <NewSighting birds={birds}/>
+        <NewSighting 
+          birds={birds} 
+          onAddSighting={handleAddSighting}
+        />
       </Route>
       <Route path='/birds/new'>
         <NewBird onAddBird={handleAddBird}/>

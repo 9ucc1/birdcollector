@@ -12,14 +12,14 @@ const linkStyles = {
     color: "white",
   };
 
-function Header({/*user*/}){
+function Header(){
 
     const {user} = useContext(UserContext)
     
     return(
         <>
-        <div>BirdCollector </div>
-        {user ? (<div>you are logged in as {user.username}</div>) : (<div>you are not logged in</div>)}
+        <h2>BirdCollector </h2>
+        {user ? (<p>you are logged in as {user.username}</p>) : (<p>you are not logged in</p>)}
         <main>
         <NavLink
                 to="/"
