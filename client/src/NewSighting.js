@@ -5,7 +5,7 @@ import {useParams, Link} from 'react-router-dom'
 function NewSighting({onAddSighting}){
 
     const [birdSeen, setBirdSeen] = useState([])
-    const {user} = useContext(UserContext)
+    const {user, addSighting} = useContext(UserContext)
 
     useEffect(() => {
         fetch(`/birds/${params.id}`)
@@ -37,7 +37,7 @@ function NewSighting({onAddSighting}){
             body: JSON.stringify(formData)
         })
         .then(r=>r.json())
-        .then(r=>onAddSighting(r))
+        .then(r=>addSighting(r))
         alert("Sighting recorded!")
     }
 

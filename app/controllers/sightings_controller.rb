@@ -1,5 +1,6 @@
 class SightingsController < ApplicationController
 rescue_from ActiveRecord::RecordInvalid, with: :render_unprocessable_entity_response
+before_action :authorize
     def create
         sighting = Sighting.create(sighting_params)
         render json: sighting, status: :created
@@ -28,5 +29,9 @@ rescue_from ActiveRecord::RecordInvalid, with: :render_unprocessable_entity_resp
 
     def render_unprocessable_entity_response(exception)
         render json: {errors: exception.record.errors.full_messages}, status: :unprocessable_entity
+    end
+
+    def authorize
+        return render json: { error: "Not authorized" }, status: :unauthorized unless session.include? :user_id
     end
 end

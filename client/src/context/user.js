@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react'
 
 //create context
-const UserContext = React.createContext({user: []})
+const UserContext = React.createContext(/*{user: []}*/)
 
 //create provider component
 function UserProvider({children}){
@@ -36,8 +36,24 @@ function UserProvider({children}){
         setUser(user)
     }
 
+    const addSighting = (newSighting) =>{
+        console.log("context add sighting", newSighting)
+        const updatedSightings = [...user.sightings, newSighting]
+        user.sightings = updatedSightings
+        setUser(user)
+    }
+    /*function handleAddSighting(newSighting){
+        console.log("app add sighting", newSighting)
+        const birdToUpdate = birds.find(bird=>bird.id === newSighting.bird_id)
+        const updatedSightings = [...birdToUpdate.sightings, newSighting]
+        birdToUpdate.sightings = updatedSightings
+        const updatedBirdState = birds.map((bird) => bird.id === birdToUpdate.id ? birdToUpdate : bird)
+        //setBirds(updatedBirdState)
+        setState({birds: updatedBirdState}, error, status)
+      }*/
+
     return (
-        <UserContext.Provider value={{user, signup, logout, login}}>
+        <UserContext.Provider value={{user, signup, logout, login, addSighting}}>
             {children}
         </UserContext.Provider>
     )

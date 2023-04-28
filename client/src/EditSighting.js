@@ -14,7 +14,7 @@ function EditSighting({onDeleteSighting}){
         console.log(editSighting)
     }, [])
 
-    const {user} = useContext(UserContext)
+    const {addSighting} = useContext(UserContext)
     const history = useHistory()
     //const userSighting = user.sightings.find(sighting=> sighting.id == params.id)
     //const userBirdId = userSighting.bird_id

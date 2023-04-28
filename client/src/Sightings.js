@@ -11,7 +11,7 @@ function Sightings({birds}){
         {user ? userBirds.map(bird=>(
             <>
             <img src={bird.image}/>
-            <li>You've seen a {bird.com_name} <Link to={`/birds/${bird.id}/sightings`}>x times.</Link></li>
+            <Link to={`/birds/${bird.id}/sightings`}>View {bird.com_name} sightings</Link>
             </>
         )) : "Log in or sign up to start sighting birds!"}
         </>

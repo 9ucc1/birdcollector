@@ -15,62 +15,78 @@ import Sighting from './Sighting.js'
 import NewSighting from './NewSighting.js'
 import EditSighting from './EditSighting.js'
 
+const initialState = {
+  birds: [],
+  error: null,
+  status: "pending",
+};
+
 function App() {
 
   const user = useContext(UserContext)
 
+  const [{birds, error, status}, setState] = useState(initialState)
+
   //const [user, setUser] = useState(null)//if user is null, loading message
   //use effect for when logged in, session checks for log in (check curriculum)
   //when user state exists, render route
-  //useContext
-  const [birds, setBirds] = useState([])
+
+  //const [birds, setBirds] = useState([])
+
   //const [sightings, setSightings] = useState([])
 
   useEffect(() => {
+    setState(initialState)
       fetch('/birds')
-      .then(r=>r.json())
-      .then(r=>setBirds(r))
-      /*fetch('/sightings')
-      .then(r=>r.json())
-      .then(r=>setSightings(r))*/ //don't fetch sightings, make serializers
-      //fetch(`/me`)
-      //if response isnt error, then set user to return of response
+      .then(r=>{
+      if (r.ok){
+        r.json().then((birds) => setState({birds, error: null, status: "ok"}))
+      } else {
+        r.json().then((message)=> setState({birds: null, error: message.error, status: "no"}))
+      }})
+      //.then(r=>r.json())
+      //.then(r=>setBirds(r))
   }, [])
 
-  //usecontext: global state technique, makes state available everywhere, separate file
+  //if (status === "ok") return <h4>Loading...</h4>
+  if (status === "no") return <h4>{error}</h4>
+
   // https://www.youtube.com/watch?v=b10ZHv4dKmg
   // https://www.youtube.com/watch?v=qKLA4zEUNzQ
-  // live coding: 
 
   function handleAddBird(newBird){
     console.log("app add bird", newBird)
-    setBirds([...birds, newBird])
+    //setBirds([...birds, newBird])
+    setState({birds: [...birds, newBird]}, error, status)
   }
 
   function handleEditBird(editedBird){
     console.log("app edit bird", editedBird)
     const updatedBirds = birds.map(bird => bird.id === editedBird.id ? editedBird : bird)
-    setBirds(updatedBirds)
+    //setBirds(updatedBirds)
+    setState({birds: updatedBirds}, error, status)
   }
 
   function handleDeleteBird(deletedBirdId){
     console.log("app delete bird", deletedBirdId)
     const updatedBirds = birds.filter(bird=> bird.id != deletedBirdId)
     console.log(updatedBirds)
-    setBirds(updatedBirds)
+    //setBirds(updatedBirds)
+    setState({birds: updatedBirds}, error, status)
   }
 
-  function handleAddSighting(newSighting){
+  /*function handleAddSighting(newSighting){
     console.log("app add sighting", newSighting)
     const birdToUpdate = birds.find(bird=>bird.id === newSighting.bird_id)
     const updatedSightings = [...birdToUpdate.sightings, newSighting]
     birdToUpdate.sightings = updatedSightings
     const updatedBirdState = birds.map((bird) => bird.id === birdToUpdate.id ? birdToUpdate : bird)
-    setBirds(updatedBirdState)
-  }
+    //setBirds(updatedBirdState)
+    setState({birds: updatedBirdState}, error, status)
+  }*/
 
   function handleDeleteSighting(deletedSightingId, userBirdId){
-    //if you just have sighting id how do you get its bird
+    //if you just have sighting id how do you get its bird?
     //const sighting = user.sightings.find(sighting=>sighting.id == deletedSightingId)
     //const birdId = sighting.bird_id
     //const birdToUpdate = birds.find(bird=>bird.id == birdId)
@@ -79,7 +95,8 @@ function App() {
     const updatedSightings = sightingsToUpdate.filter(sighting=> sighting.id != deletedSightingId)
     birdToUpdate.sightings = updatedSightings
     const updatedBirdState = birds.map(bird=>bird.id === birdToUpdate.id ? birdToUpdate : bird)
-    setBirds(updatedBirdState)
+    //setBirds(updatedBirdState)
+    setState({birds: updatedBirdState}, error, status)
   }
 
   return (
@@ -88,18 +105,18 @@ function App() {
     <Header user={user}/>
     <Switch>
       <Route path='/login'>
-        <Login /*setUser={setUser}*//>
+        <Login/>
       </Route>
       <Route path='/logout'>
-        <Logout /*setUser={setUser}*//>
+        <Logout/>
       </Route>
       <Route path='/signup'>
-        <Signup /*setUser={setUser}*//>
+        <Signup/>
       </Route>
       <Route path='/birds/:id/newsighting'>
         <NewSighting 
           birds={birds} 
-          onAddSighting={handleAddSighting}
+          //onAddSighting={handleAddSighting}
         />
       </Route>
       <Route path='/sightings/:id'>
@@ -125,7 +142,7 @@ function App() {
         <Sightings birds={birds}/>
       </Route>
       <Route path='/'>
-        <Homepage /*user={user}*//>
+        <Homepage/>
       </Route>
     </Switch>
     </UserProvider>

@@ -1,7 +1,7 @@
 import React, {useContext} from 'react'
 import {UserContext} from './context/user'
 
-function Homepage(/*{user}*/){
+function Homepage(){
 
     const {user} = useContext(UserContext)
 
