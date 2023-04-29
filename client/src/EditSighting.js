@@ -2,7 +2,7 @@ import {useParams, useHistory, Link} from 'react-router-dom'
 import {useContext, useEffect, useState} from 'react'
 import {UserContext} from './context/user'
 
-function EditSighting({onDeleteSighting}){
+function EditSighting({/*onDeleteSighting*/}){
 
     const [editSighting, setEditSighting] = useState([])
     const params = useParams()
@@ -14,7 +14,7 @@ function EditSighting({onDeleteSighting}){
         console.log(editSighting)
     }, [])
 
-    const {addSighting} = useContext(UserContext)
+    const {patchSighting, deleteSighting} = useContext(UserContext)
     const history = useHistory()
     //const userSighting = user.sightings.find(sighting=> sighting.id == params.id)
     //const userBirdId = userSighting.bird_id
@@ -34,7 +34,7 @@ function EditSighting({onDeleteSighting}){
         })
         .then(r=> {
             if (r.ok){
-                onDeleteSighting(params.id, userBirdId)
+                deleteSighting(params.id, /*userBirdId*/)
             }
         })
         alert("sighting deleted!")
@@ -43,6 +43,14 @@ function EditSighting({onDeleteSighting}){
 
     function handleSubmit(e){
         e.preventDefault()
+        fetch(`/sightings/${params.id}`,{
+            method: "PATCH",
+            headers: {"Content-Type": "application/json"},
+            body: JSON.stringify(editSighting)
+        })
+        .then(r=>r.json())
+        .then(sighting=>patchSighting(sighting))
+        alert("sighting updated!")
     }
 
     return(

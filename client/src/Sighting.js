@@ -12,13 +12,13 @@ function Sighting(){
 
     return(
         <>
-            {userBird.com_name} Sightings
+            <h3>{userBird.com_name} Sightings</h3>
             {userSightings.map(sighting=>(
                 <>
                 <ol>
-                    Date: {sighting.date},
-                    Location: {sighting.location},
-                    Notes: {sighting.notes}
+                    <b>Date:</b> {sighting.date} <br/>
+                    <b>Location:</b> {sighting.location} <br/>
+                    <b>Notes:</b> {sighting.notes} <br/>
                     <Link to={`/sightings/${sighting.id}`}><button>Edit Sighting</button></Link>
                 </ol>
                 </>

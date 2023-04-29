@@ -13,7 +13,6 @@ function UserProvider({children}){
         .then(r=>r.json())
         .then(r=>{
             setUser(r)
-            //console.log(user)
             setIsLoaded(true)
         })
     }, [])
@@ -36,24 +35,29 @@ function UserProvider({children}){
         setUser(user)
     }
 
-    const addSighting = (newSighting) =>{
+    const addSighting = (newSighting) => {
         console.log("context add sighting", newSighting)
         const updatedSightings = [...user.sightings, newSighting]
         user.sightings = updatedSightings
         setUser(user)
     }
-    /*function handleAddSighting(newSighting){
-        console.log("app add sighting", newSighting)
-        const birdToUpdate = birds.find(bird=>bird.id === newSighting.bird_id)
-        const updatedSightings = [...birdToUpdate.sightings, newSighting]
-        birdToUpdate.sightings = updatedSightings
-        const updatedBirdState = birds.map((bird) => bird.id === birdToUpdate.id ? birdToUpdate : bird)
-        //setBirds(updatedBirdState)
-        setState({birds: updatedBirdState}, error, status)
-      }*/
+
+    const patchSighting = (patchedSighting) => {
+        console.log("context patch sighting", patchedSighting)
+        const updatedSightings = user.sightings.map(sighting=>sighting.id === patchedSighting.id ? patchedSighting : sighting)
+        user.sightings = updatedSightings
+        setUser(user)
+    }
+
+    const deleteSighting = (deletedSightingId) => {
+        console.log("context delete sighting", deletedSightingId)
+        const updatedSightings = user.sightings.filter(sighting => sighting.id != deletedSightingId)
+        user.sightings = updatedSightings
+        setUser(user)
+    }
 
     return (
-        <UserContext.Provider value={{user, signup, logout, login, addSighting}}>
+        <UserContext.Provider value={{user, signup, logout, login, addSighting, patchSighting, deleteSighting}}>
             {children}
         </UserContext.Provider>
     )

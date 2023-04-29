@@ -15,6 +15,12 @@ before_action :authorize
         render json: sighting
     end
 
+    def update
+        sighting = Sighting.find(params[:id])
+        sighting.update(sighting_params)
+        render json: sighting
+    end
+
     def destroy
         sighting = Sighting.find(params[:id])
         sighting.destroy

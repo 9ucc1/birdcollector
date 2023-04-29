@@ -85,7 +85,7 @@ function App() {
     setState({birds: updatedBirdState}, error, status)
   }*/
 
-  function handleDeleteSighting(deletedSightingId, userBirdId){
+  /*function handleDeleteSighting(deletedSightingId, userBirdId){
     //if you just have sighting id how do you get its bird?
     //const sighting = user.sightings.find(sighting=>sighting.id == deletedSightingId)
     //const birdId = sighting.bird_id
@@ -97,7 +97,7 @@ function App() {
     const updatedBirdState = birds.map(bird=>bird.id === birdToUpdate.id ? birdToUpdate : bird)
     //setBirds(updatedBirdState)
     setState({birds: updatedBirdState}, error, status)
-  }
+  }*/
 
   return (
     <>
@@ -120,7 +120,7 @@ function App() {
         />
       </Route>
       <Route path='/sightings/:id'>
-        <EditSighting onDeleteSighting={handleDeleteSighting}/>
+        <EditSighting />
       </Route>
       <Route path='/birds/:id/sightings'>
         <Sighting />

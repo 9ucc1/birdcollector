@@ -7,7 +7,7 @@ function Birds({birds}){
     return (
     <>
     <Link to='/birds/new'>
-        Create a new bird
+        <h3>Create a new bird</h3>
     </Link>
     <Bird birds={birds}/>
     </>
