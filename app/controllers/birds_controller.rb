@@ -19,12 +19,6 @@ skip_before_action :authorize, only: [:index]
         render json: bird
     end
 
-    #def showsightings
-    #    bird = Bird.find(params[:id])
-    #    render json: bird.sightings
-        #that the user found
-    #end
-
     def update
         bird = Bird.find(params[:id])
         bird.update(bird_params)

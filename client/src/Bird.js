@@ -1,8 +1,11 @@
 import {Link, useParams} from 'react-router-dom'
+import {useContext} from 'react'
+import {UserContext} from './context/user'
 
 function Bird({birds}){
 
     const params = useParams()
+    const {user} = useContext(UserContext)
 
     const renderBird = birds.map(bird => (
         <div>
@@ -12,7 +15,7 @@ function Bird({birds}){
             <p>Conservation Status: {bird.conservation_status}</p>
             <p>{bird.description}</p>
             <Link to={`/birds/${bird.id}/newsighting`}>
-                Report a {bird.com_name} sighting!
+                Report a {bird.com_name} sighting
             </Link>
             <br/>
             <Link to={`/birds/${bird.id}/edit`}>
@@ -22,9 +25,7 @@ function Bird({birds}){
     ))
 
     return (
-        <>
-        {renderBird}
-        </>
+        <>{renderBird}</>
     )
 }
 

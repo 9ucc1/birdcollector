@@ -1,12 +1,15 @@
 Rails.application.routes.draw do
   post '/signup', to: 'users#create'
-  get '/users', to: 'users#index'
   get '/me', to: 'users#show'
+  #get '/users', to: 'users#index'
+  resources :users, only: [:index] 
 
   post '/login', to: 'sessions#create'
   delete '/logout', to: 'sessions#destroy'
 
-  resources :birds
+  resources :birds do
+    resources :sightings, only: [:index]
+  end
 
   resources :sightings
 

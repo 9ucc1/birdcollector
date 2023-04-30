@@ -1,11 +1,12 @@
 import React, {useState, useEffect} from 'react'
 
 //create context
-const UserContext = React.createContext(/*{user: []}*/)
+const UserContext = React.createContext()
 
 //create provider component
 function UserProvider({children}){
     const [user, setUser] = useState(null)
+    //const [uniqBirds, setUniqBirds] = useState([])
     const [isLoaded, setIsLoaded] = useState(false)
 
     useEffect(()=>{
@@ -38,22 +39,27 @@ function UserProvider({children}){
     const addSighting = (newSighting) => {
         console.log("context add sighting", newSighting)
         const updatedSightings = [...user.sightings, newSighting]
-        user.sightings = updatedSightings
-        setUser(user)
+        const updatedUser = {...user}
+        updatedUser.sightings = updatedSightings
+        console.log(updatedUser)
+        setUser(updatedUser)
+        // how do i add this to birds.uniq
     }
 
     const patchSighting = (patchedSighting) => {
         console.log("context patch sighting", patchedSighting)
         const updatedSightings = user.sightings.map(sighting=>sighting.id === patchedSighting.id ? patchedSighting : sighting)
-        user.sightings = updatedSightings
-        setUser(user)
+        const updatedUser = {...user}
+        updatedUser.sightings = updatedSightings
+        setUser(updatedUser) 
     }
 
     const deleteSighting = (deletedSightingId) => {
         console.log("context delete sighting", deletedSightingId)
         const updatedSightings = user.sightings.filter(sighting => sighting.id != deletedSightingId)
-        user.sightings = updatedSightings
-        setUser(user)
+        const updatedUser = {...user}
+        updatedUser.sightings = updatedSightings
+        setUser(updatedUser)
     }
 
     return (

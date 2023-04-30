@@ -2,7 +2,7 @@ import {useState, useContext} from 'react'
 import {useHistory} from 'react-router-dom'
 import {UserContext} from './context/user'
 
-function Login({/*setUser*/}){
+function Login(){
 
     const history = useHistory();
     const [username, setUsername] = useState("")

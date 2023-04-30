@@ -2,7 +2,7 @@ import {useParams, useHistory, Link} from 'react-router-dom'
 import {useContext, useEffect, useState} from 'react'
 import {UserContext} from './context/user'
 
-function EditSighting({/*onDeleteSighting*/}){
+function EditSighting({/*onDeleteSighting*/ birds}){
 
     const [editSighting, setEditSighting] = useState([])
     const params = useParams()

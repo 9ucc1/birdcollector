@@ -2,9 +2,10 @@ import {useState, useEffect, useContext} from 'react'
 import {UserContext} from './context/user'
 import {useParams, Link} from 'react-router-dom'
 
-function NewSighting({onAddSighting}){
+function NewSighting({onChangeUniqBird}){
 
     const [birdSeen, setBirdSeen] = useState([])
+    const [errorsList, setErrorsList] = useState([])
     const {user, addSighting} = useContext(UserContext)
 
     useEffect(() => {
@@ -37,8 +38,23 @@ function NewSighting({onAddSighting}){
             body: JSON.stringify(formData)
         })
         .then(r=>r.json())
-        .then(r=>addSighting(r))
-        alert("Sighting recorded!")
+        .then(sighting=>{
+            if (!sighting.errors){
+                addSighting(sighting)
+                alert("Sighting recorded!")
+            } else {
+                const errorLis = sighting.errors.map(error => <li>{error}</li>)
+                setErrorsList(errorLis)
+            }
+            /*if (user.birds_uniq.find(bird=> bird.id == sighting.bird_id)){
+                addSighting(sighting)
+                alert("Sighting recorded!")
+            } else {
+                addSighting(sighting)
+                onChangeUniqBird(sighting)
+                console.log("new bird!")
+            }*/
+        })
     }
 
     return (
@@ -70,6 +86,7 @@ function NewSighting({onAddSighting}){
             <br/>
             <button type="submit">Save Sighting</button>
         </form>
+        {errorsList}
         <Link to={`/birds`}>Back to Birds</Link>
         </>
     )

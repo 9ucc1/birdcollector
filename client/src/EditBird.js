@@ -90,9 +90,6 @@ function EditBird({onEditBird, onDeleteBird}){
             <br/>
             <button type="submit">Save Changes</button>
         </form>
-        <button onClick={handleDelete}>
-            Delete Bird?
-        </button>
         <br/>
         <Link to='/birds'>Back to All Birds</Link>
         </>

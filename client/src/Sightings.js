@@ -1,24 +1,32 @@
-import {useContext} from 'react'
+import {useContext, useState, useEffect} from 'react'
 import {UserContext} from './context/user'
 import {Link} from 'react-router-dom'
 
-function Sightings(){
+function Sightings({birds}){
     const {user} = useContext(UserContext)
-    const userBirds = user.birds_uniq
 
-    return (
-        <>
-        <h3>You have {user.sightings.length} total sightings, of {userBirds.length} unique species.</h3>
-        {user ? userBirds.map(bird=>(
+    //this one isnt updating with state
+
+    const userBirds = birds.filter(bird => bird.sightings.find(sighting => sighting.user_id == user.id))
+    console.log(userBirds)
+    console.log(user)
+
+    if (!user || user.error){
+        return <h4>Please log in to view sightings.</h4>
+    } else {
+        return (
             <>
-            <img src={bird.image}/>
-            <br/>
-            <Link to={`/birds/${bird.id}/sightings`}><h4>View {bird.com_name} sightings</h4></Link>
-            <br/>
+            <h3>You have {user.sightings.length} total sightings, of {user.birds_uniq.length} unique species.</h3>
+            {user.birds_uniq.map(bird=>(
+                <>
+                <img src={bird.image}/>
+                <br/>
+                <Link to={`/birds/${bird.id}/sightings`}><h4>View {bird.com_name} sightings</h4></Link>
+                <br/>
+                </>
+            ))}
             </>
-        )) : "Log in or sign up to start sighting birds!"}
-        </>
-    )
+    )}
 }
 
 export default Sightings
