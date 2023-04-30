@@ -1,23 +1,25 @@
-import {useState, useEffect} from 'react'
+import {useState, useEffect, useContext} from 'react'
 import {useParams, Link} from 'react-router-dom'
+import {BirdsContext} from './context/birds'
 
-function EditBird({onEditBird, onDeleteBird}){
+function EditBird({/*onEditBird, onDeleteBird*/}){
 
-    const [editBird, setEditBird] = useState([])
+    const [editedBird, setEditedBird] = useState([])
     const params = useParams()
+    const {editBird} = useContext(BirdsContext)
 
     useEffect(()=> {
         fetch(`/birds/${params.id}`)
         .then(r=>r.json())
-        .then(r=>setEditBird(r))
-        console.log(editBird)
+        .then(r=>setEditedBird(r))
+        console.log(editedBird)
     }, [])
 
     function handleChange(e){
-        setEditBird((currentBirdState)=>(
+        setEditedBird((currentBirdState)=>(
             {...currentBirdState, [e.target.name]: e.target.value}
         ))
-        console.log(editBird)
+        console.log(editedBird)
     }
 
     function handleSubmit(e){
@@ -25,14 +27,14 @@ function EditBird({onEditBird, onDeleteBird}){
         fetch(`/birds/${params.id}`,{
             method: "PATCH",
             headers: {"Content-Type": "application/json"},
-            body: JSON.stringify(editBird)
+            body: JSON.stringify(editedBird)
         })
         .then(r=>r.json())
-        .then(bird=>onEditBird(bird))
+        .then(bird=>editBird(bird))
         alert("bird data updated!")
     }
 
-    function handleDelete(){
+    /*function handleDelete(){
         fetch(`/birds/${params.id}`,{
             method: "DELETE",
         })
@@ -42,7 +44,7 @@ function EditBird({onEditBird, onDeleteBird}){
             }
         })
         alert("bird deleted!")
-    }
+    }*/
 
     return(
         <>
@@ -51,7 +53,7 @@ function EditBird({onEditBird, onDeleteBird}){
         <label>Common Name:</label>
             <input
                 type="text" name="com_name"
-                value={editBird.com_name}
+                value={editedBird.com_name}
                 onChange={handleChange}
                 placeholder="enter text"
             />
@@ -59,7 +61,7 @@ function EditBird({onEditBird, onDeleteBird}){
             <label>Scientific Name:</label>
             <input
                 type="text" name="sci_name"
-                value={editBird.sci_name}
+                value={editedBird.sci_name}
                 onChange={handleChange}
                 placeholder="enter text"
             />
@@ -67,7 +69,7 @@ function EditBird({onEditBird, onDeleteBird}){
             <label>Conservation Status:</label>
             <input
                 type="text" name="conservation_status"
-                value={editBird.conservation_status}
+                value={editedBird.conservation_status}
                 onChange={handleChange}
                 placeholder="enter text"
             />
@@ -75,7 +77,7 @@ function EditBird({onEditBird, onDeleteBird}){
             <label>Image URL:</label>
             <input
                 type="text" name="image"
-                value={editBird.image}
+                value={editedBird.image}
                 onChange={handleChange}
                 placeholder="enter text"
             />
@@ -83,7 +85,7 @@ function EditBird({onEditBird, onDeleteBird}){
             <label>Description:</label>
             <textarea
                 type="text" name="description"
-                value={editBird.description}
+                value={editedBird.description}
                 onChange={handleChange}
                 placeholder="enter text"
             />

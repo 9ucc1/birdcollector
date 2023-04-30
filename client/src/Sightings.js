@@ -1,9 +1,11 @@
 import {useContext, useState, useEffect} from 'react'
 import {UserContext} from './context/user'
+import {BirdsContext} from './context/birds'
 import {Link} from 'react-router-dom'
 
-function Sightings({birds}){
+function Sightings({/*birds*/}){
     const {user} = useContext(UserContext)
+    const {birds} = useContext(BirdsContext)
 
     //this one isnt updating with state
 

@@ -1,6 +1,7 @@
 import './App.css';
 import {useState, useEffect, useContext} from 'react'
 import {UserProvider, UserContext} from './context/user'
+import {BirdsProvider, BirdsContext} from './context/birds'
 import {Route, Switch} from 'react-router-dom'
 import Homepage from './Homepage.js'
 import Header from './Header.js'
@@ -17,22 +18,19 @@ import EditSighting from './EditSighting.js'
 
 function App() {
 
-  const user = useContext(UserContext)
+  const birds = useContext(BirdsContext)
 
   //const [user, setUser] = useState(null)//if user is null, loading message
   //use effect for when logged in, session checks for log in (check curriculum)
   //when user state exists, render route
 
-  const [birds, setBirds] = useState([])
+  /*const [birds, setBirds] = useState([])
 
   useEffect(() => {
       fetch('/birds')
       .then(r=>r.json())
       .then(r=>setBirds(r))
   }, [])
-
-  // https://www.youtube.com/watch?v=b10ZHv4dKmg
-  // https://www.youtube.com/watch?v=qKLA4zEUNzQ
 
   function handleAddBird(newBird){
     console.log("app add bird", newBird)
@@ -56,13 +54,14 @@ function App() {
     console.log("app change bird", sighting)
     const newBird = birds.find(bird=>bird.id === sighting.bird_id)
     console.log(newBird)
-  }
+  }*/
 
   return (
     <>
     <UserProvider>
-    <Header user={user}/>
-    <Switch>
+    <BirdsProvider>
+      <Header/>
+      <Switch>
       <Route path='/login'>
         <Login/>
       </Route>
@@ -74,38 +73,39 @@ function App() {
       </Route>
       <Route path='/birds/:id/newsighting'>
         <NewSighting 
-          birds={birds} 
-          onChangeUniqBird={updateSightedBirds}
+          /*birds={birds} 
+          onChangeUniqBird={updateSightedBirds}*/
         />
       </Route>
       <Route path='/sightings/:id'>
-        <EditSighting birds={birds}
-          onChangeUniqBird={updateSightedBirds}
+        <EditSighting /*birds={birds}
+          onChangeUniqBird={updateSightedBirds}*/
         />
       </Route>
       <Route path='/birds/:id/sightings'>
         <Sighting />
       </Route>
       <Route path='/birds/new'>
-        <NewBird onAddBird={handleAddBird}/>
+        <NewBird /*onAddBird={handleAddBird}*//>
       </Route>
       <Route path='/birds/:id/edit'>
         <EditBird 
-          birds={birds} 
+          /*birds={birds} 
           onEditBird={handleEditBird}
-          onDeleteBird={handleDeleteBird}
+          onDeleteBird={handleDeleteBird}*/
         />
       </Route>
       <Route path='/birds'>
-        <Birds birds={birds}/>
+        <Birds /*birds={birds}*//>
       </Route>
       <Route path='/sightings'>
-        <Sightings birds={birds}/>
+        <Sightings /*birds={birds}*//>
       </Route>
       <Route path='/'>
         <Homepage/>
       </Route>
-    </Switch>
+      </Switch>
+    </BirdsProvider>
     </UserProvider>
     </>
   );

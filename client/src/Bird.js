@@ -1,11 +1,13 @@
 import {Link, useParams} from 'react-router-dom'
 import {useContext} from 'react'
 import {UserContext} from './context/user'
+import {BirdsContext} from './context/birds'
 
-function Bird({birds}){
+function Bird({/*birds*/}){
 
     const params = useParams()
     const {user} = useContext(UserContext)
+    const {birds} = useContext(BirdsContext)
 
     const renderBird = birds.map(bird => (
         <div>

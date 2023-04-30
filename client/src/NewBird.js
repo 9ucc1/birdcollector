@@ -1,7 +1,8 @@
-import {useState} from 'react'
+import {useState, useContext} from 'react'
 import {Link} from 'react-router-dom'
+import {BirdsContext} from './context/birds'
 
-function NewBird({onAddBird}){
+function NewBird({/*onAddBird*/}){
 
     const initialNewBird = {
         com_name: "",
@@ -12,6 +13,7 @@ function NewBird({onAddBird}){
     }
 
     const [newBird, setNewBird] = useState(initialNewBird)
+    const {addBird} = useContext(BirdsContext)
 
     function handleChange(e){
         setNewBird((currentBirdState)=>(
@@ -35,7 +37,7 @@ function NewBird({onAddBird}){
         })
         .then(r=>r.json())
         //catch errors (phase 1 fetch)
-        .then(r=>onAddBird(r))
+        .then(r=>addBird(r))
         alert("new bird data created!")
         setNewBird(initialNewBird)
     }
