@@ -1,25 +1,25 @@
 import {useState, useEffect, useContext} from 'react'
-import {useParams, Link} from 'react-router-dom'
+import {useParams, Link, useHistory} from 'react-router-dom'
 import {BirdsContext} from './context/birds'
 
-function EditBird({/*onEditBird, onDeleteBird*/}){
+function EditBird(){
 
     const [editedBird, setEditedBird] = useState([])
+    const [errorsList, setErrorsList] = useState("")
     const params = useParams()
+    const history = useHistory()
     const {editBird} = useContext(BirdsContext)
 
     useEffect(()=> {
         fetch(`/birds/${params.id}`)
         .then(r=>r.json())
         .then(r=>setEditedBird(r))
-        console.log(editedBird)
     }, [])
 
     function handleChange(e){
         setEditedBird((currentBirdState)=>(
             {...currentBirdState, [e.target.name]: e.target.value}
         ))
-        console.log(editedBird)
     }
 
     function handleSubmit(e){
@@ -30,21 +30,17 @@ function EditBird({/*onEditBird, onDeleteBird*/}){
             body: JSON.stringify(editedBird)
         })
         .then(r=>r.json())
-        .then(bird=>editBird(bird))
-        alert("bird data updated!")
-    }
-
-    /*function handleDelete(){
-        fetch(`/birds/${params.id}`,{
-            method: "DELETE",
-        })
-        .then(r=> {
-            if (r.ok){
-                onDeleteBird(params.id)
+        .then(bird=>{
+            if (!bird.errors){
+                editBird(bird)
+                alert("bird data updated!")
+                history.push(`/birds`)
+            } else {
+                const errorLis = bird.errors.map(error =><li>{error}</li>)
+                setErrorsList(errorLis)
             }
         })
-        alert("bird deleted!")
-    }*/
+    }
 
     return(
         <>
@@ -92,6 +88,7 @@ function EditBird({/*onEditBird, onDeleteBird*/}){
             <br/>
             <button type="submit">Save Changes</button>
         </form>
+        {errorsList}
         <br/>
         <Link to='/birds'>Back to All Birds</Link>
         </>

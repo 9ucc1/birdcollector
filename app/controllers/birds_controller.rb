@@ -1,6 +1,6 @@
 class BirdsController < ApplicationController
-rescue_from ActiveRecord::RecordInvalid, with: :render_unprocessable_entity_response
-rescue_from ActiveRecord::RecordNotFound, with: :render_not_found_response
+#rescue_from ActiveRecord::RecordInvalid, with: :render_unprocessable_entity_response
+#rescue_from ActiveRecord::RecordNotFound, with: :render_not_found_response
 before_action :authorize
 skip_before_action :authorize, only: [:index]
     def index
@@ -10,7 +10,7 @@ skip_before_action :authorize, only: [:index]
     # LOGIN VALIDATION stuff for these
 
     def create
-        bird = Bird.create(bird_params)
+        bird = Bird.create!(bird_params)
         render json: bird, status: :created
     end
 
@@ -21,7 +21,7 @@ skip_before_action :authorize, only: [:index]
 
     def update
         bird = Bird.find(params[:id])
-        bird.update(bird_params)
+        bird.update!(bird_params)
         render json: bird
     end
 
@@ -31,21 +31,23 @@ skip_before_action :authorize, only: [:index]
         head :no_content
     end
 
+    ##
+    def search
+        birds = Bird.where('com_name = ?', + params[:q])
+        render json: birds
+    end
+
     private
 
     def bird_params
         params.permit(:com_name, :sci_name, :conservation_status, :image, :description)
     end
 
-    def render_unprocessable_entity_response(exception)
-        render json: {errors: exception.record.errors.full_messages}, status: :unprocessable_entity
-    end
+    #def render_unprocessable_entity_response(exception)
+    #    render json: {errors: exception.record.errors.full_messages}, status: :unprocessable_entity
+    #end
 
-    def render_not_found_response
-        render json: {error: "Bird not found"}, status: :not_found
-    end
-
-    def authorize
-        return render json: { error: "Not authorized" }, status: :unauthorized unless session.include? :user_id
-    end
+    #def render_not_found_response
+    #    render json: {error: "Bird not found"}, status: :not_found
+    #end
 end

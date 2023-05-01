@@ -1,8 +1,8 @@
 import {useState, useContext} from 'react'
-import {Link} from 'react-router-dom'
+import {Link, useHistory} from 'react-router-dom'
 import {BirdsContext} from './context/birds'
 
-function NewBird({/*onAddBird*/}){
+function NewBird(){
 
     const initialNewBird = {
         com_name: "",
@@ -14,6 +14,8 @@ function NewBird({/*onAddBird*/}){
 
     const [newBird, setNewBird] = useState(initialNewBird)
     const {addBird} = useContext(BirdsContext)
+    const [errorsList, setErrorsList] = useState("")
+    const history = useHistory()
 
     function handleChange(e){
         setNewBird((currentBirdState)=>(
@@ -36,10 +38,17 @@ function NewBird({/*onAddBird*/}){
             body: JSON.stringify(formData)
         })
         .then(r=>r.json())
-        //catch errors (phase 1 fetch)
-        .then(r=>addBird(r))
-        alert("new bird data created!")
-        setNewBird(initialNewBird)
+        .then(bird=>{
+            if (!bird.errors){
+                addBird(bird)
+                alert("new bird data created!")
+                setNewBird(initialNewBird)
+                history.push(`/birds`)
+            } else {
+                const errorLis = bird.errors.map(error =><li>{error}</li>)
+                setErrorsList(errorLis)
+            }
+        })
     }
 
     return(
@@ -88,6 +97,7 @@ function NewBird({/*onAddBird*/}){
             <br/>
             <button type="submit">Submit</button>
         </form>
+        {errorsList}
         <Link to='/birds'>Back to All Birds</Link>
         </>
     )

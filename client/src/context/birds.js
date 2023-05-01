@@ -24,18 +24,31 @@ function BirdsProvider({children}){
     }
 
     const editBird = (editedBird) => {
-        console.log("context edit bird", editedBird)
+        //console.log("context edit bird", editedBird)
         const updatedBirds = birds.map(bird => bird.id === editedBird.id ? editedBird : bird)
         setBirds(updatedBirds)
     }
 
     const addBird = (addedBird) => {
-        console.log("context create bird", addedBird)
+        //console.log("context create bird", addedBird)
         setBirds([...birds, addedBird])
     }
 
+    const updateSightedBird = (sighting) => {
+        console.log("bird context", sighting)
+        // update birds with sighting.user
+        const sightingUser = sighting.user
+        const seenBird = birds.find(bird=> sighting.bird_id === bird.id)
+        // this bird got a new user.
+        const updatedBirdUsers = [...seenBird.users, sightingUser] //update this with sightingUser
+        seenBird.users = updatedBirdUsers
+        const updatedBirds = birds.map(bird => bird.id === seenBird.id ? seenBird : bird)
+        setBirds(updatedBirds)
+        console.log("sighting's bird", seenBird, updatedBirdUsers, updatedBirds)
+    }
+
     return (
-        <BirdsContext.Provider value={{birds, addBird, editBird}}>
+        <BirdsContext.Provider value={{birds, addBird, editBird, updateSightedBird}}>
             {children}
         </BirdsContext.Provider>
     )

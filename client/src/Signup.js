@@ -25,7 +25,6 @@ function Signup(){
             })
         })
         .then(r=>r.json())
-        //.then(r=>setUser(r))
         .then(user=>{
             if (!user.errors){
                 signup(user)

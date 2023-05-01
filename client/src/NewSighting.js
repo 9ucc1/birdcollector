@@ -1,12 +1,14 @@
 import {useState, useEffect, useContext} from 'react'
 import {UserContext} from './context/user'
+import {BirdsContext} from './context/birds'
 import {useParams, Link} from 'react-router-dom'
 
-function NewSighting({onChangeUniqBird}){
+function NewSighting(){
 
     const [birdSeen, setBirdSeen] = useState([])
     const [errorsList, setErrorsList] = useState([])
     const {user, addSighting} = useContext(UserContext)
+    const {updateSightedBird} = useContext(BirdsContext)
 
     useEffect(() => {
         fetch(`/birds/${params.id}`)
@@ -39,21 +41,19 @@ function NewSighting({onChangeUniqBird}){
         })
         .then(r=>r.json())
         .then(sighting=>{
-            if (!sighting.errors){
-                addSighting(sighting)
-                alert("Sighting recorded!")
-            } else {
+            if (sighting.errors){
                 const errorLis = sighting.errors.map(error => <li>{error}</li>)
                 setErrorsList(errorLis)
-            }
-            /*if (user.birds_uniq.find(bird=> bird.id == sighting.bird_id)){
+            } else if (user.birds_uniq.find(bird=> bird.id === sighting.bird_id)){
+                //if it's already in here, don't add it to birds uniq
                 addSighting(sighting)
                 alert("Sighting recorded!")
             } else {
                 addSighting(sighting)
-                onChangeUniqBird(sighting)
-                console.log("new bird!")
-            }*/
+                updateSightedBird(sighting)
+                // update birds WITH USER
+                alert("You saw a new bird!")
+            }
         })
     }
 

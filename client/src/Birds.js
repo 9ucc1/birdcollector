@@ -4,7 +4,7 @@ import {UserContext} from './context/user'
 import {BirdsContext} from './context/birds'
 import {Link} from 'react-router-dom'
 
-function Birds({/*birds*/}){
+function Birds(){
 
     const {user} = useContext(UserContext)
     const {birds} = useContext(BirdsContext)

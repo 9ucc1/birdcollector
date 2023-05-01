@@ -6,7 +6,6 @@ const UserContext = React.createContext()
 //create provider component
 function UserProvider({children}){
     const [user, setUser] = useState(null)
-    //const [uniqBirds, setUniqBirds] = useState([])
     const [isLoaded, setIsLoaded] = useState(false)
 
     useEffect(()=>{

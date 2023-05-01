@@ -1,8 +1,8 @@
 class SightingsController < ApplicationController
-rescue_from ActiveRecord::RecordInvalid, with: :render_unprocessable_entity_response
 before_action :authorize
+before_action :authorize_user, except: [:index]
     def create
-        sighting = Sighting.create(sighting_params)
+        sighting = Sighting.create!(sighting_params)
         render json: sighting, status: :created
     end
 
@@ -17,7 +17,7 @@ before_action :authorize
 
     def update
         sighting = Sighting.find(params[:id])
-        sighting.update(sighting_params)
+        sighting.update!(sighting_params)
         render json: sighting
     end
 
@@ -25,6 +25,13 @@ before_action :authorize
         sighting = Sighting.find(params[:id])
         sighting.destroy
         head :no_content
+    end
+
+    ##
+    def recent
+        sighting = Sighting.where('date = ?', + '2023-04-24')
+        #sighting = Sighting.find(1)
+        render json: sighting
     end
 
     private
@@ -37,7 +44,9 @@ before_action :authorize
         render json: {errors: exception.record.errors.full_messages}, status: :unprocessable_entity
     end
 
-    def authorize
-        return render json: { error: "Not authorized" }, status: :unauthorized unless session.include? :user_id
+    def authorize_user
+        user_id = session[:user_id]
+        sighting = Sighting.find(params[:id])
+        return render json: { error: "You are not authorized to edit this sighting" }, status: :unauthorized unless sighting.user_id == user_id
     end
 end

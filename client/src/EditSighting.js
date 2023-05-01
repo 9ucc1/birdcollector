@@ -1,24 +1,35 @@
 import {useParams, useHistory, Link} from 'react-router-dom'
 import {useContext, useEffect, useState} from 'react'
 import {UserContext} from './context/user'
+import {BirdsContext} from './context/birds'
 
-function EditSighting({/*onDeleteSighting*/ birds}){
+function EditSighting(){
 
     const [editSighting, setEditSighting] = useState([])
     const params = useParams()
+    const [errorsList, setErrorsList] = useState([])
 
     useEffect(()=> {
         fetch(`/sightings/${params.id}`)
         .then(r=>r.json())
-        .then(r=>setEditSighting(r))
+        .then(sighting=>{
+            if (!sighting.errors){
+                setEditSighting(sighting)
+            } else {
+                const errorLis = sighting.errors.map(error=> <li>{error}</li>)
+                setErrorsList(errorLis)
+                console.log(errorsList)
+            }
+        })
         console.log(editSighting)
     }, [])
 
     const {patchSighting, deleteSighting} = useContext(UserContext)
+    const {birds} = useContext(BirdsContext)
+    const {user} = useContext(UserContext)
     const history = useHistory()
-    //const userSighting = user.sightings.find(sighting=> sighting.id == params.id)
-    //const userBirdId = userSighting.bird_id
-    const userBirdId = editSighting.bird_id
+    const userBird = birds.find(bird=>bird.id === editSighting.bird_id)
+    console.log(userBird)
 
     function handleChange(e){
         setEditSighting(currentState=>(
@@ -49,43 +60,54 @@ function EditSighting({/*onDeleteSighting*/ birds}){
             body: JSON.stringify(editSighting)
         })
         .then(r=>r.json())
-        .then(sighting=>patchSighting(sighting))
-        alert("sighting updated!")
+        .then(sighting=>{
+            if (sighting.errors){
+                const errorLis = sighting.errors.map(error => <li>{error}</li>)
+                setErrorsList(errorLis)
+            } else {
+                patchSighting(sighting)
+                alert("sighting updated!")
+            }
+        })
     }
-
-    return(
-        <>
-        <form onSubmit={handleSubmit}>
-            <h4>Edit Sighting of</h4>
-            <label>Date: </label>
-            <input
-                type="text" name="date"
-                value={editSighting.date}
-                onChange={handleChange}
-                placeholder="YYYY-MM-DD"
-            />
-            <br/>
-            <label>Location: </label>
-            <input
-                type="text" name="location"
-                value={editSighting.location}
-                onChange={handleChange}
-                placeholder="city, state"
-            />
-            <br/>
-            <label>Notes: </label>
-            <textarea
-                type="text" name="notes"
-                value={editSighting.notes}
-                onChange={handleChange}
-            />
-            <br/>
-            <button type="submit">Save Sighting</button>
-            <button onClick={handleDelete}>Delete Sighting</button>
-        </form>
-        <Link to={`/sightings`}>Back to Sightings</Link>
-        </>
-    )
+    
+    if (!user || user.error){
+        return <h3>Please log in to view sightings.</h3>
+    } else {
+        return(
+            <>
+            <form onSubmit={handleSubmit}>
+                <h4>Edit Sighting of </h4>
+                <label>Date: </label>
+                <input
+                    type="text" name="date"
+                    value={editSighting.date}
+                    onChange={handleChange}
+                    placeholder="YYYY-MM-DD"
+                />
+                <br/>
+                <label>Location: </label>
+                <input
+                    type="text" name="location"
+                    value={editSighting.location}
+                    onChange={handleChange}
+                    placeholder="city, state"
+                />
+                <br/>
+                <label>Notes: </label>
+                <textarea
+                    type="text" name="notes"
+                    value={editSighting.notes}
+                    onChange={handleChange}
+                />
+                <br/>
+                <button type="submit">Save Sighting</button>
+                <button onClick={handleDelete}>Delete Sighting</button>
+            </form>
+            {errorsList}
+            <Link to={`/sightings`}>Back to Sightings</Link>
+            </>
+    )}
 }
 
 export default EditSighting
