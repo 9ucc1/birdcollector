@@ -2,12 +2,10 @@ class BirdsController < ApplicationController
 #rescue_from ActiveRecord::RecordInvalid, with: :render_unprocessable_entity_response
 #rescue_from ActiveRecord::RecordNotFound, with: :render_not_found_response
 before_action :authorize
-skip_before_action :authorize, only: [:index]
+#skip_before_action :authorize, only: [:index]
     def index
         render json: Bird.all
     end
-
-    # LOGIN VALIDATION stuff for these
 
     def create
         bird = Bird.create!(bird_params)

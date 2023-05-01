@@ -7,7 +7,7 @@ function NewSighting(){
 
     const [birdSeen, setBirdSeen] = useState([])
     const [errorsList, setErrorsList] = useState([])
-    const {user, addSighting} = useContext(UserContext)
+    const {user, addSighting, setUser} = useContext(UserContext)
     const {updateSightedBird} = useContext(BirdsContext)
 
     useEffect(() => {
@@ -40,7 +40,7 @@ function NewSighting(){
             body: JSON.stringify(formData)
         })
         .then(r=>r.json())
-        .then(sighting=>{
+        /*.then(sighting=>{
             if (sighting.errors){
                 const errorLis = sighting.errors.map(error => <li>{error}</li>)
                 setErrorsList(errorLis)
@@ -54,6 +54,14 @@ function NewSighting(){
                 // update birds WITH USER
                 alert("You saw a new bird!")
             }
+        })*/
+
+        /*.then(updatedUser=>{
+            console.log(updatedUser)
+        })*/
+        .then(sighting=>{
+            addSighting(sighting)
+            alert("Sighting recorded!")
         })
     }
 

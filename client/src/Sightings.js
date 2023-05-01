@@ -11,7 +11,7 @@ function Sightings(){
 
     //const userBirds = birds.filter(bird => bird.sightings.find(sighting => sighting.user_id == user.id))
     //console.log(userBirds)
-    console.log(user)
+    //console.log(user)
 
     if (!user || user.error){
         return <h3>Please log in to view sightings.</h3>

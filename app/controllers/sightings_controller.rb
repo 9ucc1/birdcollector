@@ -1,8 +1,18 @@
 class SightingsController < ApplicationController
 before_action :authorize
-before_action :authorize_user, except: [:index]
+before_action :authorize_user, except: [:index, :create]
     def create
         sighting = Sighting.create!(sighting_params)
+
+        #with sighting object, determine 
+
+        #check user's uniq birds, does this bird already exist?
+        #if so, do nothing
+        #if not, add bird object
+        #sightings need to bring bird with it(serializer) either sighting pov or bird pov
+        
+        #user = User.find_by(sighting[:user_id])
+        #render json: user, status: :created
         render json: sighting, status: :created
     end
 
@@ -40,9 +50,9 @@ before_action :authorize_user, except: [:index]
         params.permit(:date, :location, :notes, :user_id, :bird_id)
     end
 
-    def render_unprocessable_entity_response(exception)
-        render json: {errors: exception.record.errors.full_messages}, status: :unprocessable_entity
-    end
+    #def render_unprocessable_entity_response(exception)
+    #    render json: {errors: exception.record.errors.full_messages}, status: :unprocessable_entity
+    #end
 
     def authorize_user
         user_id = session[:user_id]

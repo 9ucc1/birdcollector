@@ -45,7 +45,8 @@ function EditSighting(){
         })
         .then(r=> {
             if (r.ok){
-                deleteSighting(params.id, /*userBirdId*/)
+                deleteSighting(params.id, userBird)
+                //console.log(userBird)
             }
         })
         alert("sighting deleted!")
@@ -77,7 +78,7 @@ function EditSighting(){
         return(
             <>
             <form onSubmit={handleSubmit}>
-                <h4>Edit Sighting of </h4>
+                <h4>Edit Sighting</h4>
                 <label>Date: </label>
                 <input
                     type="text" name="date"

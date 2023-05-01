@@ -15,7 +15,7 @@ The app utilizes Ruby on Rails, JavaScript, React.js, JSX, HTML, CSS.
 
 ## Installation
 
-To run the app locally, clone this GitHub repository into your machine with 'git clone'. In the root directory, run 'bundle install', followed by 'rails db:create' and 'npm install --prefix client'. To start the application, run 'rails s' to start the server on [http://localhost:3000](http://localhost:3000), and run 'npm start --prefix client' to start the frontend on [http://localhost:4000](http://localhost:4000).
+To run the app locally, clone this GitHub repository into your machine with 'git clone'. In the root directory, run 'bundle install', followed by 'rails db:create db:migrate db:seed' and 'npm install --prefix client'. To start the application, run 'rails s' to start the server on [http://localhost:3000](http://localhost:3000), and run 'npm start --prefix client' to start the frontend on [http://localhost:4000](http://localhost:4000).
 
 ## Inspiration and Future Direction
 

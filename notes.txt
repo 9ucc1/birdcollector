@@ -1,3 +1,33 @@
 practice challenge:
 
 create a custom route that searches for a bird by name.
+
+
+User = {
+User’s keys: …,
+birds_uniq: [
+                {
+                 Id: 1 ,
+                Name: pigeon,
+                users_sightings (cond. render for this user, build in birds serializer): [
+                                              {
+                                                Id: 12
+                                                ….
+                                              }
+                ]
+                }
+
+
+]}
+
+    def create
+        sighting = Sighting.create!(sighting_params)
+        #check user's uniq birds, does this bird already exist?
+        #if so, do nothing
+        #if not, add bird object
+        #sightings need to bring bird with it(serializer) either sighting pov or bird pov
+        
+        #user = User.find_by(sighting[:user_id])
+        #render json: user, status: :created
+        render json: sighting, status: :created
+    end
