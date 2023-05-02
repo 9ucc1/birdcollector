@@ -7,6 +7,7 @@ function Login(){
     const history = useHistory();
     const [username, setUsername] = useState("")
     const [password, setPassword] = useState("")
+    const [errorList, setErrorsList] = useState("")
     const {login} = useContext(UserContext)
 
     function handleSubmit(e){
@@ -20,8 +21,16 @@ function Login(){
             })
         })
         .then(r=>r.json())
-        .then(r=>login(r))
-        history.push('/')
+        .then(r=>{
+            if (!r.error){
+                login(r)
+                history.push('/')
+            } else {
+                setErrorsList(r.error)
+                setUsername("")
+                setPassword("")
+            }
+        })
     }
 
     return(
@@ -46,6 +55,7 @@ function Login(){
             <br/>
             <button type="submit">Log In</button>
         </form>
+        {errorList}
         </>
     )
 }

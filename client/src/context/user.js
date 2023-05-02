@@ -70,7 +70,7 @@ function UserProvider({children}){
         //console.log(userBird.sightings.find(sighting => sighting.user_id == user.id))
        if((userBird.sightings.find(sighting => sighting.user_id == user.id)) === undefined){
         //const updatedBirds = updatedUser.birds_uniq.filter(bird => bird.id !== userBird.id)
-        const updatedBirds = updatedUser.birds_uniq.filter(bird=>bird.id != userBird.id) ///////remove userBird from birds_uniq
+        const updatedBirds = updatedUser.birds_uniq.filter(bird=>bird.id != userBird.id)
         console.log(updatedBirds)
         updatedUser.birds_uniq = updatedBirds
         setUser(updatedUser)
