@@ -40,28 +40,14 @@ function NewSighting(){
             body: JSON.stringify(formData)
         })
         .then(r=>r.json())
-        /*.then(sighting=>{
-            if (sighting.errors){
-                const errorLis = sighting.errors.map(error => <li>{error}</li>)
-                setErrorsList(errorLis)
-            } else if (user.birds_uniq.find(bird=> bird.id === sighting.bird_id)){
-                //if it's already in here, don't add it to birds uniq
+        .then(sighting=>{
+            if (!sighting.errors){
                 addSighting(sighting)
                 alert("Sighting recorded!")
             } else {
-                addSighting(sighting)
-                updateSightedBird(sighting)
-                // update birds WITH USER
-                alert("You saw a new bird!")
+                const errorLis = sighting.errors.map(error => <li>{error}</li>)
+                setErrorsList(errorLis)
             }
-        })*/
-
-        /*.then(updatedUser=>{
-            console.log(updatedUser)
-        })*/
-        .then(sighting=>{
-            addSighting(sighting)
-            alert("Sighting recorded!")
         })
     }
 
