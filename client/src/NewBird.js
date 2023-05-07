@@ -21,6 +21,7 @@ function NewBird(){
         setNewBird((currentBirdState)=>(
             {...currentBirdState, [e.target.name]: e.target.value}
         ))
+        console.log(newBird)
     }
 
     function handleSubmit(e){
@@ -72,12 +73,16 @@ function NewBird(){
             />
             <br/>
             <label>Conservation Status:</label>
-            <input
-                type="text" name="conservation_status"
-                value={newBird.conservation_status}
+            <select name="conservation_status"
                 onChange={handleChange}
-                placeholder="enter text"
-            />
+                value={newBird.conservation_status}
+            >
+                <option>Least Concern</option>
+                <option>Near Threatened</option>
+                <option>Vulnerable</option>
+                <option>Endangered</option>
+                <option>Critically Endangered</option>
+            </select>
             <br/>
             <label>Image URL:</label>
             <input
@@ -104,3 +109,12 @@ function NewBird(){
 }
 
 export default NewBird
+
+/*
+            <input
+                type="text" name="conservation_status"
+                value={newBird.conservation_status}
+                onChange={handleChange}
+                placeholder="enter text"
+            />
+*/

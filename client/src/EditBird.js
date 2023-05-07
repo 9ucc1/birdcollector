@@ -63,12 +63,16 @@ function EditBird(){
             />
             <br/>
             <label>Conservation Status:</label>
-            <input
-                type="text" name="conservation_status"
-                value={editedBird.conservation_status}
+            <select name="conservation_status"
                 onChange={handleChange}
-                placeholder="enter text"
-            />
+                value={editedBird.conservation_status}
+            >
+                <option>Least Concern</option>
+                <option>Near Threatened</option>
+                <option>Vulnerable</option>
+                <option>Endangered</option>
+                <option>Critically Endangered</option>
+            </select>
             <br/>
             <label>Image URL:</label>
             <input
@@ -96,3 +100,13 @@ function EditBird(){
 }
 
 export default EditBird
+
+/*
+            <label>Conservation Status:</label>
+            <input
+                type="text" name="conservation_status"
+                value={editedBird.conservation_status}
+                onChange={handleChange}
+                placeholder="enter text"
+            />
+*/

@@ -31,3 +31,8 @@ birds_uniq: [
         #render json: user, status: :created
         render json: sighting, status: :created
     end
+
+
+    #def self.notesearch(word)
+    #    self.where('notes LIKE ?', "%" + word + "%")
+    #end

@@ -1,9 +1,7 @@
 import React, {useState, useEffect} from 'react'
 
-//create context
 const BirdsContext = React.createContext()
 
-//create provider component
 function BirdsProvider({children}){
     const [birds, setBirds] = useState([])
     const [isLoaded, setIsLoaded] = useState(false)
