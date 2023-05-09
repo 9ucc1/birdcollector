@@ -1,23 +1,26 @@
 import {useState, useEffect, useContext} from 'react'
 import {UserContext} from './context/user'
-import {BirdsContext} from './context/birds'
 import {useParams, Link} from 'react-router-dom'
 
 function NewSighting(){
 
+    const initialNewSighting = {
+        date: "",
+        location: "",
+        notes: ""
+    }
+
     const [birdSeen, setBirdSeen] = useState([])
     const [errorsList, setErrorsList] = useState([])
-    const {user, addSighting, setUser} = useContext(UserContext)
-    const {updateSightedBird} = useContext(BirdsContext)
+    const {user, addSighting} = useContext(UserContext)
+    const params = useParams()
+    const [newSighting, setNewSighting] = useState(initialNewSighting)
 
     useEffect(() => {
         fetch(`/birds/${params.id}`)
         .then(r=>r.json())
         .then(r=>setBirdSeen(r))
     }, [])
-
-    const params = useParams()
-    const [newSighting, setNewSighting] = useState([])
 
     function handleChange(e){
         setNewSighting((currentSighting)=>(
@@ -43,6 +46,7 @@ function NewSighting(){
         .then(sighting=>{
             if (!sighting.errors){
                 addSighting(sighting)
+                setNewSighting(initialNewSighting)
                 alert("Sighting recorded!")
             } else {
                 const errorLis = sighting.errors.map(error => <li>{error}</li>)

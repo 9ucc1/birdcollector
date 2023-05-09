@@ -1,5 +1,5 @@
 import {useState, useContext} from 'react'
-import {Link, useHistory} from 'react-router-dom'
+import {Link} from 'react-router-dom'
 import {BirdsContext} from './context/birds'
 
 function NewBird(){
@@ -15,13 +15,11 @@ function NewBird(){
     const [newBird, setNewBird] = useState(initialNewBird)
     const {addBird} = useContext(BirdsContext)
     const [errorsList, setErrorsList] = useState("")
-    const history = useHistory()
 
     function handleChange(e){
         setNewBird((currentBirdState)=>(
             {...currentBirdState, [e.target.name]: e.target.value}
         ))
-        console.log(newBird)
     }
 
     function handleSubmit(e){
@@ -44,7 +42,6 @@ function NewBird(){
                 addBird(bird)
                 alert("new bird data created!")
                 setNewBird(initialNewBird)
-                history.push(`/birds`)
             } else {
                 const errorLis = bird.errors.map(error =><li>{error}</li>)
                 setErrorsList(errorLis)
@@ -109,12 +106,3 @@ function NewBird(){
 }
 
 export default NewBird
-
-/*
-            <input
-                type="text" name="conservation_status"
-                value={newBird.conservation_status}
-                onChange={handleChange}
-                placeholder="enter text"
-            />
-*/

@@ -18,10 +18,8 @@ function EditSighting(){
             } else {
                 const errorLis = sighting.errors.map(error=> <li>{error}</li>)
                 setErrorsList(errorLis)
-                console.log(errorsList)
             }
         })
-        console.log(editSighting)
     }, [])
 
     const {patchSighting, deleteSighting} = useContext(UserContext)
@@ -29,13 +27,11 @@ function EditSighting(){
     const {user} = useContext(UserContext)
     const history = useHistory()
     const userBird = birds.find(bird=>bird.id === editSighting.bird_id)
-    console.log(userBird)
 
     function handleChange(e){
         setEditSighting(currentState=>(
             {...currentState, [e.target.name]: e.target.value}
         ))
-        console.log(editSighting)
     }
 
     function handleDelete(e){
@@ -46,7 +42,6 @@ function EditSighting(){
         .then(r=> {
             if (r.ok){
                 deleteSighting(params.id, userBird)
-                //console.log(userBird)
             }
         })
         alert("sighting deleted!")

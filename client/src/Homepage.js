@@ -12,7 +12,6 @@ function Homepage(){
         </>
         )
     } else {
-        //console.log(user)
         return (<>
         <h2>Welcome, {user.name}!</h2>
         <h3>Click the buttons above to browse birds and record sightings.</h3>

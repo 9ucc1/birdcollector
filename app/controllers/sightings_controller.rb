@@ -50,17 +50,17 @@ end
     #end
 
 
-    #def search
-        #sightings = Sighting.where('notes LIKE ?', "%" + params[:word] + "%")
-        #render json: sightings
+    # def search
+    #     sightings = Sighting.where('notes LIKE ?', "%" + params[:word] + "%")
+    #     render json: sightings
     #    sightings = Sighting.notesearch(params[:word])
     #    if sightings.count >0
     #        birds = sightings.map{|s| s.bird}
-    #        render json: birds
-    #    else
-    #        render json: {error: "no results found"}
-    #    end
-    #end
+    #         render json: birds
+    #     else
+    #         render json: {error: "no results found"}
+    #     end
+    # end
 
         #def create:
         #with sighting object, determine 

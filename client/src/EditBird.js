@@ -100,13 +100,3 @@ function EditBird(){
 }
 
 export default EditBird
-
-/*
-            <label>Conservation Status:</label>
-            <input
-                type="text" name="conservation_status"
-                value={editedBird.conservation_status}
-                onChange={handleChange}
-                placeholder="enter text"
-            />
-*/

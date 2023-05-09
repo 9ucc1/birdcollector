@@ -5,13 +5,6 @@ import {Link} from 'react-router-dom'
 
 function Sightings(){
     const {user} = useContext(UserContext)
-    const {birds} = useContext(BirdsContext)
-
-    //this one isnt updating with state
-
-    //const userBirds = birds.filter(bird => bird.sightings.find(sighting => sighting.user_id == user.id))
-    //console.log(userBirds)
-    //console.log(user)
 
     if (!user || user.error){
         return <h3>Please log in to view sightings.</h3>
@@ -29,17 +22,6 @@ function Sightings(){
             ))}
             </>
     )}
-
-    /*return (
-        <>
-        <h3>You have {user.sightings.length} total sightings.</h3>
-        {user.sightings.map(sighting =>(
-            <>
-
-            </>
-        ))}
-        </>
-    )*/
 }
 
 export default Sightings

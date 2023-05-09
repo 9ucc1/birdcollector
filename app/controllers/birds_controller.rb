@@ -21,12 +21,6 @@ skip_before_action :authorize, only: [:index]
         render json: bird
     end
 
-    def destroy
-        bird = Bird.find(params[:id])
-        bird.destroy
-        head :no_content
-    end
-
     private
 
     def bird_params
@@ -34,6 +28,7 @@ skip_before_action :authorize, only: [:index]
     end
 
 end
+
 
 
     ##
